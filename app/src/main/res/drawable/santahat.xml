@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+        android:oneshot="true" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/santahat_one" android:duration="200"/>
+    <item android:drawable="@drawable/santahat_two" android:duration="200"/>
+    <item android:drawable="@drawable/santahat_three" android:duration="200"/>
+    <item android:drawable="@drawable/santahat_four" android:duration="200"/>
+</animation-list>
