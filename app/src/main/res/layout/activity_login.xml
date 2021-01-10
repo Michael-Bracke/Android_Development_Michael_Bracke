@@ -7,7 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".views.RegisterSSA" android:background="#B53A3A" android:padding="30dp">
 
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView2"
@@ -15,8 +16,9 @@
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintHorizontal_bias="0.0">
 
-    </com.example.secret_santa_app.CustomGifView>
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    </secret.santa.application.CustomGifView>
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView3"
@@ -24,8 +26,9 @@
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintHorizontal_bias="1.0">
 
-    </com.example.secret_santa_app.CustomGifView>
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    </secret.santa.application.CustomGifView>
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView4"
@@ -34,16 +37,17 @@
                                                 app:layout_constraintHorizontal_bias="0.516"
                                                 app:layout_constraintVertical_bias="1.0">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
     <EditText
         android:id="@+id/inptEmail"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
         android:layout_marginTop="200dp"
         android:background="@drawable/rounded_text_white"
         android:ems="10"
-        android:hint="test123"
+        android:textSize="12dp"
+        android:hint="gebruikersnaam"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +57,8 @@
     <Button
         android:id="@+id/btnInloggen"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/rounded_btn_black"
         android:text="Inloggen"
@@ -64,15 +68,16 @@
         app:layout_constraintTop_toBottomOf="@+id/inptPassword" />
 
     <EditText
-        android:paddingLeft="15dp"
         android:id="@+id/inptPassword"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/rounded_text_white"
         android:ems="10"
+        android:textSize="12dp"
         android:hint="@string/Password"
         android:inputType="textPassword"
+        android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inptEmail" />

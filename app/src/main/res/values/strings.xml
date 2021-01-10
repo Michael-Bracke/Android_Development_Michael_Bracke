@@ -1,6 +1,7 @@
 <resources>
+    <string name="database_instance">https://secret-santa-application-default-rtdb.europe-west1.firebasedatabase.app</string>
     <string name="app_name">Secret_Santa_App</string>
-    <string name="app_version">V1.00</string>
+    <string name="app_version">V1.01</string>
     <string name="homePageText">Hallo, Welkom op de énige echte secret santa app!</string>
     <string name="descriptionHat">Santas hoed</string>
     <string name="Password">Password</string>
@@ -21,4 +22,8 @@
     <string name="title_favo">Jouw verlanglijstje</string>
     <string name="favo_name">Item naam</string>
     <string name="favo_add">Voeg item toe</string>
+    <string name="Message_Create">Verstuur nieuw bericht</string>
+    <string name="Message_Group_Header">Groep chat</string>
+    <string name="Chat_Group">Group Chat</string>
+    <string name="Message_Send">Versturen</string>
 </resources>

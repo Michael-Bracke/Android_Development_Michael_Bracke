@@ -1,79 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.secret_santa_app">
+    package="com.secret.santa">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
-        android:name=".dbParse.App"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:name="secret.santa.application.dbParse.App"
+        android:allowBackup="true"
+        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity android:name=".views.RegisterSSA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".views.LoginSSA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-        <activity android:name=".views.GroupOverviewSSA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".views.GroupCreationSSA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
+        <activity android:name=".views.GroupCreationSSA"
+            android:parentActivityName=".views.GroupOverviewSSA">
+            <!-- Door een meta data attr. toe te voegen weet deze view wat zijn parent view is. -->
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.GroupOverviewSSA"></meta-data>
         </activity>
         <activity android:name=".views.MainSSA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.GroupDetailSSA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".views.GroupCodeFillSSA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".views.GroupCodeFillSSA"
+            android:parentActivityName=".views.GroupOverviewSSA">
+            <!-- Door een meta data attr. toe te voegen weet deze view wat zijn parent view is. -->
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.GroupOverviewSSA"></meta-data>
         </activity>
         <activity android:name=".views.AccountMainSSA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.AccountFavoListSSA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".views.AccountFavoListSSA"
+            android:parentActivityName=".views.AccountMainSSA">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.AccountMainSSA"></meta-data>
         </activity>
-        <activity android:name=".views.AccountFavoCreationSSA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".views.AccountFavoCreationSSA"
+            android:parentActivityName=".views.AccountFavoListSSA">
+            <!-- Door een meta data attr. toe te voegen weet deze view wat zijn parent view is. -->
+           <meta-data android:name="android.support.PARENT_ACTIVITY"
+               android:value=".views.AccountFavoListSSA"></meta-data>
         </activity>
-        <service android:name=".services.MusicServiceSSA"></service>
+        <activity android:name=".views.GroupOverviewSSA"
+            android:parentActivityName=".views.MainSSA">
+                <meta-data android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".views.MainSSA"></meta-data>
+        </activity>
+        <activity android:name=".views.GroupDetailSSA"
+            android:parentActivityName=".views.GroupOverviewSSA">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.GroupOverviewSSA"></meta-data>
+        </activity>
+        <activity android:name="secret.santa.application.views.chat.GroupChatLog"
+            android:parentActivityName=".views.GroupOverviewSSA">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.GroupOverviewSSA"></meta-data>
+        </activity>
+        <service android:name="secret.santa.application.services.MusicServiceSSA"></service>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -7,7 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".views.GroupOverviewSSA" android:background="#B53A3A" android:padding="20dp">
 
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView2"
@@ -15,9 +16,9 @@
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintHorizontal_bias="0.0">
 
-    </com.example.secret_santa_app.CustomGifView>
-    <include layout="@layout/toolbar_actionbar_custom"/>
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    </secret.santa.application.CustomGifView>
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView3"
@@ -25,9 +26,9 @@
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintHorizontal_bias="1.0">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
-    <com.example.secret_santa_app.CustomGifView
+    <secret.santa.application.CustomGifView
         android:id="@+id/customGifView4"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -38,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -63,19 +64,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imgProfileAccount"
+        android:layout_width="83dp"
+        android:layout_height="92dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAccountPersonal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="@+id/customGifView4"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/btnAccountPersonal"
         android:layout_width="295dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/rounded_btn_gradient"
         android:fontFamily="@font/mountains_of_christmas_bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textSize="16sp"
         android:text="@string/accountOverviewMore"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#FFF"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />

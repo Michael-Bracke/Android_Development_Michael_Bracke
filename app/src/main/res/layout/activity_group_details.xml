@@ -7,7 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".views.GroupOverviewSSA" android:background="#B53A3A" android:padding="20dp">
 
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView2"
@@ -15,9 +16,9 @@
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintHorizontal_bias="0.0">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
-    <com.example.secret_santa_app.CustomGifView
+    <secret.santa.application.CustomGifView
         android:id="@+id/customGifView3"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -27,9 +28,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
-    <com.example.secret_santa_app.CustomGifView
+    <secret.santa.application.CustomGifView
         android:id="@+id/customGifView4"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -40,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
     <TextView
         android:id="@+id/regMessageField"
@@ -52,8 +53,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGroupName" />
 
-    <LinearLayout
-        android:id="@+id/layoutList"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewGroupDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
@@ -80,19 +81,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <include layout="@layout/toolbar_actionbar_custom"/>
+
+    <Button
+        android:id="@+id/btnChatGroup"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_btn_gradient"
+        android:text="@string/Chat_Group"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#FFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/btnShareGroup"
+        android:layout_width="140dp"
         android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_btn_gradient"
         android:text="@string/User_Add"
-        android:textColor="#FFF"
-        android:layout_width="140dp"
-        android:textSize="12sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#FFF"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView

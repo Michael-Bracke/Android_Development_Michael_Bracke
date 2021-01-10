@@ -7,7 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".views.GroupOverviewSSA" android:background="#B53A3A" android:padding="20dp">
 
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView2"
@@ -15,9 +16,9 @@
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintHorizontal_bias="0.0">
 
-    </com.example.secret_santa_app.CustomGifView>
-    <include layout="@layout/toolbar_actionbar_custom"/>
-    <com.example.secret_santa_app.CustomGifView android:layout_width="wrap_content" android:layout_height="0dp"
+    </secret.santa.application.CustomGifView>
+    <secret.santa.application.CustomGifView
+        android:layout_width="wrap_content" android:layout_height="0dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
                                                 android:id="@+id/customGifView3"
@@ -25,9 +26,9 @@
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintHorizontal_bias="1.0">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
-    <com.example.secret_santa_app.CustomGifView
+    <secret.santa.application.CustomGifView
         android:id="@+id/customGifView4"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -38,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-    </com.example.secret_santa_app.CustomGifView>
+    </secret.santa.application.CustomGifView>
 
     <TextView
         android:id="@+id/regMessageField"
@@ -47,15 +48,15 @@
         android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imgProfile"
+        android:layout_width="95dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="@string/aanmaken"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -64,23 +65,15 @@
         android:id="@+id/headerGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/mountains_of_christmas_bold"
         android:text="@string/title_favo"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_favoItems"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regMessageField" />
-
-    <LinearLayout
-        android:id="@+id/layoutList"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnFavoCreation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerGroup" />
+        app:layout_constraintTop_toTopOf="@+id/regMessageField" />
 
     <Button
         android:id="@+id/btnFavoCreation"
@@ -103,5 +96,15 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/recyclerView_favoItems"
+        android:layout_width="0dp"
+        android:layout_height="326dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnFavoCreation"
+        app:layout_constraintEnd_toEndOf="@+id/customGifView3"
+        app:layout_constraintStart_toStartOf="@+id/customGifView2"
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
