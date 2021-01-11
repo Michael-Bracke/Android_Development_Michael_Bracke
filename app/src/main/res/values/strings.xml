@@ -1,7 +1,11 @@
 <resources>
+    <!-- FACEBOOK STRINGS -->
+    <string name="facebook_app_id">260231285439105</string>
+    <string name="fb_login_protocol_scheme">fb260231285439105</string>
+    <!-- FIREBASE INSTANCE STRING -->
     <string name="database_instance">https://secret-santa-application-default-rtdb.europe-west1.firebasedatabase.app</string>
     <string name="app_name">Secret_Santa_App</string>
-    <string name="app_version">V1.01</string>
+    <string name="app_version">V1.02</string>
     <string name="homePageText">Hallo, Welkom op de énige echte secret santa app!</string>
     <string name="descriptionHat">Santas hoed</string>
     <string name="Password">Password</string>
@@ -26,4 +30,5 @@
     <string name="Message_Group_Header">Groep chat</string>
     <string name="Chat_Group">Group Chat</string>
     <string name="Message_Send">Versturen</string>
+    <string name="facebook_login">Ga verder met facebook</string>
 </resources>

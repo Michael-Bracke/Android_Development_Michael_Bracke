@@ -8,8 +8,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.secret.santa.R
-import com.parse.ParseInstallation
-import com.parse.ParseUser
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_account_overview.*
 
@@ -23,7 +21,6 @@ class AccountMainSSA() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "Account"
         // de juiste config. aanroepen om te kunnen verbinden met DB
-        ParseInstallation.getCurrentInstallation().saveInBackground();
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_account_overview);
         btnAccountFavoList.setOnClickListener { GoToAccountFavoList() }
@@ -45,7 +42,7 @@ class AccountMainSSA() : AppCompatActivity() {
         when (item?.itemId){
             // SWITCH CASE
             R.id.menuSignOut -> {
-                ParseUser.logOut();
+                FirebaseAuth.getInstance().signOut();
                 val intent = Intent(this, LoginSSA::class.java)
                 // deze stap is belangerijk mits dit er voor gaat zorgen dat de user eens hij is ingelogd
                 // NIET weer terug gaat naar het regisratieformulier met de 'terug' toets

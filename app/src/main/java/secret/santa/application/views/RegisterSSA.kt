@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.parse.ParseInstallation
 import com.secret.santa.R
 import kotlinx.android.synthetic.main.activity_register.*
 import secret.santa.application.services.MusicServiceSSA
@@ -35,7 +34,6 @@ class RegisterSSA() : AppCompatActivity() {
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_register)
         // de juiste config. aanroepen om te kunnen verbinden met DB
-        ParseInstallation.getCurrentInstallation().saveInBackground();
         alreadyHaveAccountText.setOnClickListener { this.HaveAcc(); }
         btnRegister.setOnClickListener {
             try {

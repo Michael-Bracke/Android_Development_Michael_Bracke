@@ -1,7 +1,6 @@
 package secret.santa.application.models;
 
 
-import com.parse.ParseObject;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -39,19 +38,5 @@ public class ChatMessage {
         return this.UserID;
     }
 
-
-    public void StoreDatabase() {
-        String messageText = this.GetText();
-        long messageDateSend = this.GetDateSend();
-        String messageUserID = this.GetUserID();
-        String messageGroupID = this.GetGroupID();
-        ParseObject ObjectToStore = new ParseObject("Message");
-        ObjectToStore.put("Text", messageText);
-        ObjectToStore.put("DateSend", messageDateSend);
-        ObjectToStore.put("UserID", messageUserID);
-        ObjectToStore.put("GroupID", messageGroupID);
-
-        ObjectToStore.saveInBackground();
-    }
 
 }

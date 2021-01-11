@@ -1,23 +1,31 @@
 package com.secret.santa.views
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.secret.santa.R
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 
 
 class LoginSSA : AppCompatActivity() {
 
     companion object{
         val USER_NAME = "USER_NAME"
+        val TAG = "LOGIN"
     }
 
+    val callbackManager = CallbackManager.Factory.create();
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +35,41 @@ class LoginSSA : AppCompatActivity() {
         // create on click event for the login btn
         textRegistreer.setOnClickListener { RegView(); }
         btnInloggen.setOnClickListener {  Login(); }
-        // Write a message to the database
+
+        val EMAIL = "email"
+
+        val loginButton = findViewById<View>(R.id.btnFacebookLogin) as LoginButton
+        loginButton.setReadPermissions(Arrays.asList(EMAIL))
+        // If you are using in a fragment, call loginButton.setFragment(this);
+
+        // Callback registration
+        // If you are using in a fragment, call loginButton.setFragment(this);
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
+            override fun onSuccess(loginResult: LoginResult?) {
+                Log.d(TAG, loginResult.toString())
+            }
+
+            override fun onCancel() {
+                Log.d(TAG, "CANCE3LLED")
+            }
+
+            override fun onError(exception: FacebookException) {
+                Log.d(TAG,exception.message.toString())
+            }
+        })
 
 
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun RegView(){

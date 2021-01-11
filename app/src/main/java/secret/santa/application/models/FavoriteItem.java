@@ -1,6 +1,5 @@
 package secret.santa.application.models;
 
-import com.parse.ParseObject;
 
 
 public class FavoriteItem {
@@ -41,22 +40,6 @@ public class FavoriteItem {
     }
 
 
-    public void StoreDatabase() {
-        String favName = this.GetName();
-        Boolean favActive = this.IsActive();
-        String favUserID = this.GetUserID();
-        String favLink = this.GetLink();
-        String favText = this.GetText();
-
-        ParseObject favObjectToStore = new ParseObject("FavoriteItems");
-        favObjectToStore.put("Name", favName);
-        favObjectToStore.put("Active", favActive);
-        favObjectToStore.put("UserID", favUserID);
-        favObjectToStore.put("Link", favLink);
-        favObjectToStore.put("Text", favText);
-
-        favObjectToStore.saveInBackground();
-    }
 
 }
 

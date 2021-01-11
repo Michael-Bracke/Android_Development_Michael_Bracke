@@ -27,15 +27,16 @@
                                                 app:layout_constraintHorizontal_bias="1.0">
 
     </secret.santa.application.CustomGifView>
+
     <secret.santa.application.CustomGifView
-        android:layout_width="wrap_content" android:layout_height="0dp"
-                                                app:layout_constraintStart_toStartOf="parent"
-                                                app:layout_constraintEnd_toEndOf="parent"
-                                                android:id="@+id/customGifView4"
-                                                app:layout_constraintTop_toTopOf="parent"
-                                                app:layout_constraintBottom_toBottomOf="parent"
-                                                app:layout_constraintHorizontal_bias="0.516"
-                                                app:layout_constraintVertical_bias="1.0">
+        android:id="@+id/customGifView4"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </secret.santa.application.CustomGifView>
 
@@ -54,18 +55,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/btnInloggen"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="220dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="118dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_btn_black"
         android:text="Inloggen"
         android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inptPassword" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnFacebookLogin"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/facebook_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInloggen" />
 
     <EditText
         android:id="@+id/inptPassword"
@@ -93,7 +105,7 @@
         android:id="@+id/textRegistreer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="45dp"
         android:text="Nog geen account? Registreer je hier."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

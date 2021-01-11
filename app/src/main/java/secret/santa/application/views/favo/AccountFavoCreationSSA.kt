@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
-import com.parse.*
 import kotlinx.android.synthetic.main.activity_account_favo_creation.*
 import secret.santa.application.models.FavoriteItem
 
@@ -74,7 +73,7 @@ class AccountFavoCreationSSA() : AppCompatActivity() {
         when (item?.itemId) {
             // SWITCH CASE
             R.id.menuSignOut -> {
-                ParseUser.logOut();
+                FirebaseAuth.getInstance().signOut();
                 val intent = Intent(this, LoginSSA::class.java)
                 // deze stap is belangerijk mits dit er voor gaat zorgen dat de user eens hij is ingelogd
                 // NIET weer terug gaat naar het regisratieformulier met de 'terug' toets

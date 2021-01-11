@@ -13,8 +13,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
-import com.parse.ParseUser
 import com.secret.santa.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -147,7 +145,7 @@ class GroupOverviewSSA() : AppCompatActivity() {
         when (item?.itemId) {
             // SWITCH CASE
             R.id.menuSignOut -> {
-                ParseUser.logOut();
+                FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginSSA::class.java)
                 // deze stap is belangerijk mits dit er voor gaat zorgen dat de user eens hij is ingelogd
                 // NIET weer terug gaat naar het regisratieformulier met de 'terug' toets

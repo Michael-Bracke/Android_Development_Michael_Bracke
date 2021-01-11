@@ -15,10 +15,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.secret.santa.R
-import com.parse.ParseInstallation
-import com.parse.ParseObject
-import com.parse.ParseQuery
-import com.parse.ParseUser
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -85,16 +81,6 @@ class AccountFavoListSSA() : AppCompatActivity() {
     }
 
 
-    private fun DeleteFavoItem(id: String) {
-        val query = ParseQuery.getQuery<ParseObject>("FavoriteItems")
-        // Retrieve the object by id
-        query.whereEqualTo("objectId", id)
-        var results = query.find();
-        results.forEach() {
-            it.deleteInBackground()
-            CheckFavoItemsForUser()
-        }
-    }
 
     // STANDARD FUNCT TO IMPLEMENT ON EACH VIEW
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -102,7 +88,7 @@ class AccountFavoListSSA() : AppCompatActivity() {
         when (item?.itemId) {
             // SWITCH CASE
             R.id.menuSignOut -> {
-                ParseUser.logOut();
+                FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginSSA::class.java)
                 // deze stap is belangerijk mits dit er voor gaat zorgen dat de user eens hij is ingelogd
                 // NIET weer terug gaat naar het regisratieformulier met de 'terug' toets
