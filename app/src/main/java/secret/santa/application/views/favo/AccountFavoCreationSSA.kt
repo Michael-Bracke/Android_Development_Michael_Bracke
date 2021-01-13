@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
 import kotlinx.android.synthetic.main.activity_account_favo_creation.*
 import secret.santa.application.models.FavoriteItem
+import secret.santa.application.services.MusicServiceSSA
 
 
 class AccountFavoCreationSSA() : AppCompatActivity() {
@@ -94,7 +95,27 @@ class AccountFavoCreationSSA() : AppCompatActivity() {
 
     // create the overal options menu ( just the layout )
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var serviceItent = Intent();
         menuInflater.inflate(R.menu.nav_menu, menu);
+        menu?.getItem(1)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(0).setVisible(true)
+            it.setVisible(false)
+            startService(serviceItent)
+            true
+        }
+        menu?.getItem(0)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(1).setVisible(true)
+            it.setVisible(false)
+            stopService(serviceItent)
+            true
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 

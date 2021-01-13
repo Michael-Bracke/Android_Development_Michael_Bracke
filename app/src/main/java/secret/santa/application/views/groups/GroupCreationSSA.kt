@@ -103,20 +103,6 @@ class GroupCreationSSA() : AppCompatActivity() {
 
     }
 
-    // STANDARD FUNCT TO IMPLEMENT ON EACH VIEW
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return true
-    }
-
 
 
 }

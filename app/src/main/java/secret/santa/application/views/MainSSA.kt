@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
 import kotlinx.android.synthetic.main.activity_main_overview.*
+import secret.santa.application.services.MusicServiceSSA
 
 
 class MainSSA() : AppCompatActivity() {
@@ -52,6 +53,13 @@ class MainSSA() : AppCompatActivity() {
         // item.itemId = de id dat aan de items zijn gelinkt in het menu dat je hebt aangemaakt
         when (item?.itemId){
             // SWITCH CASE
+
+            R.id.menuSound -> {
+
+
+
+            }
+
             R.id.menuSignOut -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginSSA::class.java)
@@ -74,6 +82,25 @@ class MainSSA() : AppCompatActivity() {
     // create the overal options menu ( just the layout )
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu);
+        menu?.getItem(1)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(0).setVisible(true)
+            it.setVisible(false)
+            startService(serviceItent)
+           true
+        }
+        menu?.getItem(0)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(1).setVisible(true)
+            it.setVisible(false)
+            stopService(serviceItent)
+            true
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 

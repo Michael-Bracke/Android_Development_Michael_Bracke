@@ -97,36 +97,5 @@ class GroupCodeFillSSA() : AppCompatActivity() {
     }
 
 
-    // STANDARD FUNCT TO IMPLEMENT ON EACH VIEW
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // item.itemId = de id dat aan de items zijn gelinkt in het menu dat je hebt aangemaakt
-        when (item?.itemId) {
-            // SWITCH CASE
-            R.id.menuSignOut -> {
-                FirebaseAuth.getInstance().signOut();
-                val intent = Intent(this, LoginSSA::class.java)
-                // deze stap is belangerijk mits dit er voor gaat zorgen dat de user eens hij is ingelogd
-                // NIET weer terug gaat naar het regisratieformulier met de 'terug' toets
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-            R.id.menuGroup -> {
-                val intent = Intent(this, GroupOverviewSSA::class.java)
-                startActivity(intent);
-            }
-            R.id.menuHome -> {
-                val intent = Intent(this, MainSSA::class.java)
-                startActivity(intent);
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    // create the overal options menu ( just the layout )
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.nav_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
 
 }

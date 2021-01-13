@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_account_favo_list.*
 import kotlinx.android.synthetic.main.activity_account_overview.*
 import kotlinx.android.synthetic.main.row_add_favo_item.view.*
 import secret.santa.application.models.FavoriteItem
+import secret.santa.application.services.MusicServiceSSA
 
 class AccountFavoListSSA() : AppCompatActivity() {
 
@@ -109,7 +110,27 @@ class AccountFavoListSSA() : AppCompatActivity() {
 
     // create the overal options menu ( just the layout )
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var serviceItent = Intent();
         menuInflater.inflate(R.menu.nav_menu, menu);
+        menu?.getItem(1)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(0).setVisible(true)
+            it.setVisible(false)
+            startService(serviceItent)
+            true
+        }
+        menu?.getItem(0)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(1).setVisible(true)
+            it.setVisible(false)
+            stopService(serviceItent)
+            true
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 

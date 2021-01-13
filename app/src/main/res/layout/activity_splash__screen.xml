@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="secret.santa.application.Splash_Screen"
+    android:background="#B53A3A"
+    android:id="@+id/relativeLayoutSplash">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/splash_image"
+        android:layout_width="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_height="350dp"
+        android:layout_above="@+id/splash_image_loading"
+        android:foregroundGravity="center"
+        android:src="@drawable/animator_drawable_hat"></androidx.appcompat.widget.AppCompatImageView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/splash_image_loading"
+        android:layout_width="wrap_content"
+        android:foregroundGravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/animator_drawable_loading"></androidx.appcompat.widget.AppCompatImageView>
+
+</RelativeLayout>

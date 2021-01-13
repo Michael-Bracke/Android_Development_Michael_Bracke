@@ -15,13 +15,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.secret.santa.R
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import kotlinx.android.synthetic.main.activity_account_overview.*
 import kotlinx.android.synthetic.main.activity_group_detail.*
-import kotlinx.android.synthetic.main.row_add_user.view.*
+import kotlinx.android.synthetic.main.user_row.view.*
 import secret.santa.application.models.Group
 import secret.santa.application.models.User
+import secret.santa.application.services.MusicServiceSSA
 import secret.santa.application.views.chat.GroupChatLog
 
 
@@ -121,7 +124,27 @@ class GroupDetailSSA() : AppCompatActivity() {
 
     // create the overal options menu ( just the layout )
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var serviceItent = Intent();
         menuInflater.inflate(R.menu.nav_menu, menu);
+        menu?.getItem(1)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(0).setVisible(true)
+            it.setVisible(false)
+            startService(serviceItent)
+            true
+        }
+        menu?.getItem(0)?.setOnMenuItemClickListener {
+            // MUSICA MAESTROOOO
+            // hier roepen we service aan en starten we hem
+            serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
+            menu.getItem(1).setVisible(true)
+            it.setVisible(false)
+            stopService(serviceItent)
+            true
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -130,11 +153,17 @@ class GroupDetailSSA() : AppCompatActivity() {
 
 class GroupDetailItem(val user: User) : Item<GroupieViewHolder>() {
     override fun getLayout(): Int {
-        return R.layout.row_add_user
+        return R.layout.user_row
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.tvText.text = user.Name;
+        if(user.ProfileImageUrl != null) {
+            // reset imgView
+            viewHolder.itemView.imgAvatar.setImageDrawable(null)
+            // load the img into the imgview
+            Picasso.get().load(user.ProfileImageUrl).into(viewHolder.itemView.imgAvatar)
+        }
     }
 
 }

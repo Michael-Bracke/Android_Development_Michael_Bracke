@@ -5,17 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="4dp">
+    android:paddingVertical="8dp">
 
     <TextView
-        android:background="@drawable/rounded_btn_gradient"
+        android:background="@drawable/group_item_background"
         android:id="@+id/tvGroupOverviewDetail"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:text="TextView"
-        android:textColor="#FFF"
+        android:textColor="#333"
         android:fontFamily="@font/mountains_of_christmas_bold"
         android:gravity="center"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,6 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/tvGroupOverview"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

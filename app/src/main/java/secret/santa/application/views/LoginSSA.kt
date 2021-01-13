@@ -13,6 +13,7 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.secret.santa.R
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
@@ -24,18 +25,22 @@ class LoginSSA : AppCompatActivity() {
         val USER_NAME = "USER_NAME"
         val TAG = "LOGIN"
     }
+    // FACEBOOK AUTH INSTANCE
+    // val callbackManager = CallbackManager.Factory.create();
 
-    val callbackManager = CallbackManager.Factory.create();
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         // change to the activity login view
         setContentView(R.layout.activity_login)
         // create on click event for the login btn
         textRegistreer.setOnClickListener { RegView(); }
         btnInloggen.setOnClickListener {  Login(); }
 
+        /* FACEBOOK AUTH INSTANCE
         val EMAIL = "email"
 
         val loginButton = findViewById<View>(R.id.btnFacebookLogin) as LoginButton
@@ -48,7 +53,13 @@ class LoginSSA : AppCompatActivity() {
         // Callback registration
         loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
             override fun onSuccess(loginResult: LoginResult?) {
-                Log.d(TAG, loginResult.toString())
+                Log.d(TAG, "signInWithCredential:success")
+                val user = FirebaseAuth.getInstance().currentUser
+                val intent = Intent(this@LoginSSA, MainSSA::class.java)
+                intent.putExtra(USER_NAME, user?.displayName)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
             }
 
             override fun onCancel() {
@@ -61,8 +72,13 @@ class LoginSSA : AppCompatActivity() {
         })
 
 
+
+  */
+
+
     }
 
+/*FACEBOOK AUTH INSTANCE
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -71,6 +87,7 @@ class LoginSSA : AppCompatActivity() {
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }
+  */
 
     private fun RegView(){
         val intent = Intent(this, RegisterSSA::class.java);

@@ -65,13 +65,13 @@
         android:id="@+id/inptEmail"
         android:layout_width="220dp"
         android:layout_height="35dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_text_white"
         android:ems="10"
         android:hint="Email"
-        android:textSize="13dp"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
+        android:textSize="13dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="218dp"
         android:layout_height="34dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_btn_black"
         android:ems="10"
         android:text="Registreren"
@@ -90,16 +90,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inptPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/inptPassword2" />
 
     <TextView
         android:id="@+id/alreadyHaveAccountText"
         android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="Reeds een account? inloggen."
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
@@ -107,17 +107,33 @@
         android:id="@+id/inptPassword"
         android:layout_width="220dp"
         android:layout_height="35dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_text_white"
         android:ems="10"
-        android:textSize="13dp"
         android:hint="Wachtwoord"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
+        android:textSize="13dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inptEmail" />
+
+    <EditText
+        android:id="@+id/inptPassword2"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_text_white"
+        android:ems="10"
+        android:hint="Herhaal wachtwoord"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inptPassword" />
 
     <TextView
         android:id="@+id/regMessageField"
