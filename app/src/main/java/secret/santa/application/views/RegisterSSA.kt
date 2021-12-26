@@ -115,9 +115,12 @@ class RegisterSSA() : AppCompatActivity() {
     }
 
     private fun uploadImageToFirebaseStorage(){
-        // user dont have to choose a picture, upload standard avater when not chosen anything
+        // user dont have to choose a picture, choose standard avater when not chosen anything
+        // TODO: Give user the option in a latter version to change picture
         if(selectedFotoUri == null) {
-
+                FirebaseStorage.getInstance().getReference("/images/ssst_santa_img.jpg").downloadUrl.addOnSuccessListener {
+                    saveUserToFireBaseDatabase(it.toString());
+                }
         } else {
 
             // uploaden van files
