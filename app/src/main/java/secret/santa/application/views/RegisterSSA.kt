@@ -93,8 +93,6 @@ class RegisterSSA() : AppCompatActivity() {
                     it.addOnFailureListener {
                         Log.d("USERCREATION", it.message.toString())
                     }
-
-
                     regPasswrd.setError(it.toString())
                     return@addOnCompleteListener
                 }
@@ -103,7 +101,7 @@ class RegisterSSA() : AppCompatActivity() {
 
             }
                 .addOnFailureListener{
-                    regEmail.setError("Er kon geen user aangemaakt worden!")
+                    regEmail.setError(it.message)
                 }
 
         }
@@ -117,23 +115,25 @@ class RegisterSSA() : AppCompatActivity() {
     }
 
     private fun uploadImageToFirebaseStorage(){
+        // user dont have to choose a picture, upload standard avater when not chosen anything
+        if(selectedFotoUri == null) {
 
-        if(selectedFotoUri == null) return
+        } else {
 
-        // uploaden van files
-        val fileName = UUID.randomUUID().toString()
-        val fileRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
-        Log.d("DATABASE", "PROBEREN FILE TE UPLOADEN -> ${selectedFotoUri.toString()}")
-        fileRef.putFile(selectedFotoUri!!)
-            .addOnSuccessListener {
-                fileRef.downloadUrl.addOnSuccessListener {
-                    saveUserToFireBaseDatabase(it.toString());
+            // uploaden van files
+            val fileName = UUID.randomUUID().toString()
+            val fileRef = FirebaseStorage.getInstance().getReference("/images/$fileName")
+            Log.d("DATABASE", "PROBEREN FILE TE UPLOADEN -> ${selectedFotoUri.toString()}")
+            fileRef.putFile(selectedFotoUri!!)
+                .addOnSuccessListener {
+                    fileRef.downloadUrl.addOnSuccessListener {
+                        saveUserToFireBaseDatabase(it.toString());
+                    }
                 }
-            }
-            .addOnFailureListener{
-                Log.d("UPLOAD IMAGE", "Fail? -> ${it.toString()}")
-            }
-
+                .addOnFailureListener {
+                    Log.d("UPLOAD IMAGE", "Fail? -> ${it.toString()}")
+                }
+        }
     }
 
     private fun saveUserToFireBaseDatabase(profileImageUrl : String){
