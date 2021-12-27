@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -19,6 +20,9 @@ import com.parse.ParseInstallation
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
+import com.secret.santa.databinding.ActivityAccountFavoCreationBinding
+import com.secret.santa.databinding.ActivityAccountFavoListBinding
+import com.secret.santa.databinding.ActivityGroupCodeFillBinding
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -29,17 +33,19 @@ class AccountFavoListSSA() : AppCompatActivity() {
 
     // het definiëren van de adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
+    private lateinit var binding: ActivityAccountFavoListBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
+        binding = ActivityAccountFavoListBinding.inflate(layoutInflater)
         supportActionBar?.title = "Verlanglijstje"
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_account_favo_list);
-        //TODO Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(imgProfile);
-        //TODO  btnFavoCreation.setOnClickListener { CreateFavoItem() }
+        Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(binding.imgProfile);
+        binding.btnFavoCreation.setOnClickListener { CreateFavoItem() }
         CheckFavoItemsForUser()
 
 
@@ -74,7 +80,7 @@ class AccountFavoListSSA() : AppCompatActivity() {
                 }
                 // maak het visueel zichtbaar door deze adapter ook te binden
                 // met de recyclerview
-                //TODO   recyclerView_favoItems.adapter = adapter
+                binding.recyclerViewFavoItems.adapter = adapter
             }
 
 
@@ -135,11 +141,10 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        //TODO    viewHolder.itemView.tvFavoItem.text = favoriteItem.Name
-        /* TODO   viewHolder.itemView.imgCross.setOnClickListener {
+        viewHolder.itemView.findViewById<TextView>(R.id.tvFavoItem).text = favoriteItem.Name
+        viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
             // set on click listener for deleting an item
         }
-*/
     }
 
 }

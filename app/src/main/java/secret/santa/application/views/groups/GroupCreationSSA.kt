@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.secret.santa.R
+import com.secret.santa.databinding.ActivityGroupCreationBinding
+import com.secret.santa.databinding.ActivityGroupDetailBinding
 
 import secret.santa.application.models.Group
 import secret.santa.application.models.User
@@ -26,18 +28,20 @@ import kotlin.random.Random.Default.nextInt
 class GroupCreationSSA() : AppCompatActivity() {
 
     private val TAG = "GroupCreation"
+    private lateinit var binding: ActivityGroupCreationBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
+        binding = ActivityGroupCreationBinding.inflate(layoutInflater)
         supportActionBar?.title = "Groep aanmaken"
         // de juiste config. aanroepen om te kunnen verbinden met DB
 
         // het definiëren van de layout keuze
-        setContentView(R.layout.activity_group_creation);
-        //TODO  btnJoinGroup.setOnClickListener { CreateGroup() }
+        setContentView(binding.root);
+        binding.btnJoinGroup.setOnClickListener { CreateGroup() }
 
 
     }

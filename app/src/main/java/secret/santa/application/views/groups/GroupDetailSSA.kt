@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -15,6 +16,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.secret.santa.R
+import com.secret.santa.databinding.ActivityGroupDetailBinding
+import com.secret.santa.databinding.ActivityGroupListOverviewBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -29,14 +32,15 @@ class GroupDetailSSA() : AppCompatActivity() {
         val GROUP = "GROUP_"
     }
     val adapter = GroupAdapter<GroupieViewHolder>()
+    private lateinit var binding: ActivityGroupDetailBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_group_detail)
-        // het the correct groupId from the previous view
+        binding = ActivityGroupDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)        // het the correct groupId from the previous view
         // ( waar user groep selecteerd)
         val group = intent.getParcelableExtra<Group>(GroupOverviewSSA.GROUP)
         if(group != null) {
@@ -44,7 +48,7 @@ class GroupDetailSSA() : AppCompatActivity() {
             supportActionBar?.title = group.Name;
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             fetchUsersForGroup(group);
-            /*TODO  btnShareGroup.setOnClickListener {
+            binding.btnShareGroup.setOnClickListener {
                 val inviteId = intent.getStringExtra(GroupOverviewSSA.GROUP_INVITE_ID);
                 Log.d("SHARING",inviteId.toString())
                 val intent = Intent(android.content.Intent.ACTION_SEND);
@@ -54,7 +58,7 @@ class GroupDetailSSA() : AppCompatActivity() {
                 val subjectString = "Hier is jouw unieke code : "+ inviteId.toString() +" om te verzilveren in de app! "
                 intent.putExtra(Intent.EXTRA_TEXT, subjectString);
                 startActivity(Intent.createChooser(intent, "Hoe wil iemand uitnodigen?"));
-            } */
+            }
         }
         // het defienieren van de adapter
 
@@ -62,7 +66,7 @@ class GroupDetailSSA() : AppCompatActivity() {
 
 
 
-        //TODO  recyclerView_groupDetailOverview.adapter = adapter
+        binding.recyclerViewGroupDetailOverview.adapter = adapter
         val btn = findViewById<Button>(R.id.btnGroupChat)
         btn.setOnClickListener {
             val intent = Intent(this, GroupChatLog::class.java);
@@ -132,7 +136,7 @@ class GroupDetailItem(val user: User) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        //TODO  viewHolder.itemView.tvText.text = user.Name;
+        viewHolder.itemView.findViewById<TextView>(R.id.tvText).text = user.Name;
     }
 
 }

@@ -7,6 +7,7 @@ import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -191,8 +192,8 @@ class Groupitem(val group: Group): Item<GroupieViewHolder>(){
         // wordt opgeroepen in onze lijst van groepobjecten
         // voor ieder groep object apart
 
-        //TODO Kijken hoe je dit correct implementeerd met viewbindings
-        viewHolder.itemView.tvGroupOverviewDetail.text = group.Name
+        val title = viewHolder.itemView.findViewById<TextView>(R.id.tvGroupOverviewDetail)
+        title.text = group.Name
     }
 
 }

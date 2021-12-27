@@ -12,11 +12,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
 import com.parse.*
+import com.secret.santa.databinding.ActivityAccountFavoCreationBinding
+import com.secret.santa.databinding.ActivityAccountFavoListBinding
 import secret.santa.application.models.FavoriteItem
 
 
 class AccountFavoCreationSSA() : AppCompatActivity() {
 
+    private lateinit var binding: ActivityAccountFavoCreationBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
@@ -24,10 +27,11 @@ class AccountFavoCreationSSA() : AppCompatActivity() {
         // overerven van param
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "Nieuw item toevoegen"
+        binding = ActivityAccountFavoCreationBinding.inflate(layoutInflater)
         // de juiste config. aanroepen om te kunnen verbinden met DB
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_account_favo_creation);
-        //TODO btnAddFavoItem.setOnClickListener { CreateFavoItem() }
+        binding.btnAddFavoItem.setOnClickListener { CreateFavoItem() }
     }
 
 

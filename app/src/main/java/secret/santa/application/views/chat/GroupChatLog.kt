@@ -2,6 +2,7 @@ package secret.santa.application.views.chat
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -10,6 +11,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
+import com.secret.santa.databinding.ActivityAccountFavoCreationBinding
+import com.secret.santa.databinding.ActivityGroupChatLogBinding
 import com.secret.santa.views.GroupDetailSSA
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -25,6 +28,7 @@ class GroupChatLog() : AppCompatActivity() {
         val TAG = "Chatlog"
     }
     val adapter = GroupAdapter<GroupieViewHolder>()
+    private lateinit var binding: ActivityGroupChatLogBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
@@ -32,42 +36,42 @@ class GroupChatLog() : AppCompatActivity() {
         // overerven van param
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_chat_log)
-
+        binding = ActivityGroupChatLogBinding.inflate(layoutInflater)
         // get group data
         val group = intent.getParcelableExtra<Group>(GroupDetailSSA.GROUP)
-        /*
+
         if(group != null){
             supportActionBar?.title = group.Name + " - CHAT"
-            btnSendMessage.setOnClickListener {
+            binding.btnSendMessage.setOnClickListener {
                 performSendMessage(group);
             }
             listenForMessages(group)
         }
 
         // het definiëren de adapter
-        recyclerView_groupDetail_chat_log.adapter = adapter
+        binding.recyclerViewGroupDetailChatLog.adapter = adapter
 
 
         //fetchGroupInformation()
-*/
+
 
     }
 
     private fun performSendMessage(group:Group) {
       val ref =   FirebaseDatabase.getInstance(getString(R.string.database_instance)).getReference("/group-messages").push()
         // push zorgt ervoor dat deze iedere keer een unique id krijgt
-/*TODO
-        if(!edSendMessage.text.isEmpty()) // controle op leeg textveld
-            else
-               edSendMessage.setError("Gelieve een bericht in te voeren!")
 
-        val chatMessage = ChatMessage(ref.key, edSendMessage.text.toString(), FirebaseAuth.getInstance().uid,group.Id, System.currentTimeMillis())
+        if(!binding.edSendMessage.text.isEmpty()) // controle op leeg textveld
+            else
+            binding.edSendMessage.setError("Gelieve een bericht in te voeren!")
+
+        val chatMessage = ChatMessage(ref.key, binding.edSendMessage.text.toString(), FirebaseAuth.getInstance().uid,group.Id, System.currentTimeMillis())
       ref.setValue(chatMessage)
           .addOnSuccessListener {
               Log.d(TAG, "SUCCESVOL OPGESLAGEN");
           }
 
-          */
+
 
     }
 
@@ -110,7 +114,7 @@ class ChatItemFrom(val chatMessage: ChatMessage) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        //TODO viewHolder.itemView.messageField.text = chatMessage.GetText()
+        viewHolder.itemView.findViewById<TextView>(R.id.messageField).text = chatMessage.GetText()
     }
 
 }
@@ -121,7 +125,7 @@ class ChatItemTo(val chatMessage: ChatMessage) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        //TODO  viewHolder.itemView.messageField.text = chatMessage.GetText()
+        viewHolder.itemView.findViewById<TextView>(R.id.messageField).text = chatMessage.GetText()
     }
 
 }

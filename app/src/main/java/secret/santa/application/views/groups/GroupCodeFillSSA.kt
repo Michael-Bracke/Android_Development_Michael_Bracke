@@ -14,6 +14,8 @@ import com.parse.ParseInstallation
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
+import com.secret.santa.databinding.ActivityGroupCodeFillBinding
+import com.secret.santa.databinding.ActivityGroupCreationBinding
 
 import org.json.JSONArray
 import secret.santa.application.models.Group
@@ -25,27 +27,28 @@ class GroupCodeFillSSA() : AppCompatActivity() {
     companion object {
         val TAG = "GROUPCODE"
     }
+    private lateinit var binding: ActivityGroupCodeFillBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
+        binding = ActivityGroupCodeFillBinding.inflate(layoutInflater)
         supportActionBar?.title = "Groepcode invullen"
         // de juiste config. aanroepen om te kunnen verbinden met DB
 
         // het definiëren van de layout keuze
-        setContentView(R.layout.activity_group_code_fill);
+        setContentView(binding.root);
 
-        //TODO btnJoinGroup.setOnClickListener { JoinGroup(); }
+        binding.btnJoinGroup.setOnClickListener { JoinGroup(); }
 
 
     }
 
 
     private fun JoinGroup() {
-        /* //TODO
-        val text = inptGroupCode.text;
+        val text = binding.inptGroupCode.text;
         if (!text.isEmpty()) {
             val ref = FirebaseDatabase.getInstance(getString(R.string.database_instance))
                 .getReference("/groups")
@@ -96,9 +99,8 @@ class GroupCodeFillSSA() : AppCompatActivity() {
             })
 
         } else {
-            inptGroupCode.setError("Gelieve een code in tegeven")
+            binding.inptGroupCode.setError("Gelieve een code in tegeven")
         }
-   */
     }
 
 
