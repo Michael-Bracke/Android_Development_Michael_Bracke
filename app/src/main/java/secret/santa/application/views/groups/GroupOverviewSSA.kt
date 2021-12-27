@@ -16,16 +16,19 @@ import com.google.firebase.database.ValueEventListener
 
 import com.parse.ParseUser
 import com.secret.santa.R
+import com.secret.santa.databinding.ActivityAccountOverviewBinding
+import com.secret.santa.databinding.ActivityGroupListOverviewBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.activity_group_list_overview.*
-import kotlinx.android.synthetic.main.group_row.view.*
+
 import secret.santa.application.models.Group
 import secret.santa.application.models.User
 
 
 class GroupOverviewSSA() : AppCompatActivity() {
+
+    private lateinit var binding: ActivityGroupListOverviewBinding
 
 
     @Override
@@ -33,20 +36,23 @@ class GroupOverviewSSA() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_group_list_overview)
+        binding = ActivityGroupListOverviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.title = "Groepen"
-        tvGroupOverViewHeader.text = "Groepen waar jij lid van bent"
+        binding.tvGroupOverViewHeader.text = "Groepen waar jij lid van bent"
 
         // nieuwe groep toevoegen
-        btnAddGroup.setOnClickListener {
+        binding.btnAddGroup.setOnClickListener {
             val intent = Intent(this, GroupCreationSSA::class.java)
             startActivity(intent)
         }
-       // code verzilveren
-        btnHaveCode.setOnClickListener {
+        // code verzilveren
+        binding.btnHaveCode.setOnClickListener {
             val intent = Intent(this, GroupCodeFillSSA::class.java)
             startActivity(intent)
         }
+
+
         // het definiëren van de adapter
         val adapter = GroupAdapter<GroupieViewHolder>()
 
@@ -85,11 +91,11 @@ class GroupOverviewSSA() : AppCompatActivity() {
                            }
                            override fun onDataChange(snapshot: DataSnapshot) {
                                if(snapshot.children.count() == 0){
-                                   tvGroupCount.text = "Je bent nog niet aangesloten bij een groep. Maak zelf een groep of wacht tot je wordt uitgenodigd!"
+                                   binding.tvGroupCount.text = "Je bent nog niet aangesloten bij een groep. Maak zelf een groep of wacht tot je wordt uitgenodigd!"
                                }
                               snapshot.children.forEach{
                                  adapter.add(Groupitem(group))
-                                  tvGroupCount.text = ""
+                                  binding.tvGroupCount.text = ""
                               }
 
                            }
@@ -132,7 +138,7 @@ class GroupOverviewSSA() : AppCompatActivity() {
                }
                // maak het visueel zichtbaar door deze adapter ook te binden
                // met de recyclerview
-               recyclerView_GroupOverview.adapter = adapter
+               binding.recyclerViewGroupOverview.adapter = adapter
 
            }
            override fun onCancelled(error: DatabaseError) { }
@@ -184,6 +190,8 @@ class Groupitem(val group: Group): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         // wordt opgeroepen in onze lijst van groepobjecten
         // voor ieder groep object apart
+
+        //TODO Kijken hoe je dit correct implementeerd met viewbindings
         viewHolder.itemView.tvGroupOverviewDetail.text = group.Name
     }
 

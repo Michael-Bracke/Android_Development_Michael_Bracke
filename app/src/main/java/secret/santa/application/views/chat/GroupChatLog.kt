@@ -14,8 +14,6 @@ import com.secret.santa.views.GroupDetailSSA
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.activity_group_chat_log.*
-import kotlinx.android.synthetic.main.row_chat_add_message_self.view.*
 import secret.santa.application.models.ChatMessage
 import secret.santa.application.models.Group
 
@@ -37,6 +35,7 @@ class GroupChatLog() : AppCompatActivity() {
 
         // get group data
         val group = intent.getParcelableExtra<Group>(GroupDetailSSA.GROUP)
+        /*
         if(group != null){
             supportActionBar?.title = group.Name + " - CHAT"
             btnSendMessage.setOnClickListener {
@@ -50,14 +49,14 @@ class GroupChatLog() : AppCompatActivity() {
 
 
         //fetchGroupInformation()
-
+*/
 
     }
 
     private fun performSendMessage(group:Group) {
       val ref =   FirebaseDatabase.getInstance(getString(R.string.database_instance)).getReference("/group-messages").push()
         // push zorgt ervoor dat deze iedere keer een unique id krijgt
-
+/*TODO
         if(!edSendMessage.text.isEmpty()) // controle op leeg textveld
             else
                edSendMessage.setError("Gelieve een bericht in te voeren!")
@@ -67,6 +66,9 @@ class GroupChatLog() : AppCompatActivity() {
           .addOnSuccessListener {
               Log.d(TAG, "SUCCESVOL OPGESLAGEN");
           }
+
+          */
+
     }
 
     private fun listenForMessages(group:Group){
@@ -108,7 +110,7 @@ class ChatItemFrom(val chatMessage: ChatMessage) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.messageField.text = chatMessage.GetText()
+        //TODO viewHolder.itemView.messageField.text = chatMessage.GetText()
     }
 
 }
@@ -119,7 +121,7 @@ class ChatItemTo(val chatMessage: ChatMessage) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.messageField.text = chatMessage.GetText()
+        //TODO  viewHolder.itemView.messageField.text = chatMessage.GetText()
     }
 
 }

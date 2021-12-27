@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
 import com.parse.*
-import kotlinx.android.synthetic.main.activity_account_favo_creation.*
 import secret.santa.application.models.FavoriteItem
 
 
@@ -28,7 +27,7 @@ class AccountFavoCreationSSA() : AppCompatActivity() {
         // de juiste config. aanroepen om te kunnen verbinden met DB
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_account_favo_creation);
-        btnAddFavoItem.setOnClickListener { CreateFavoItem() }
+        //TODO btnAddFavoItem.setOnClickListener { CreateFavoItem() }
     }
 
 

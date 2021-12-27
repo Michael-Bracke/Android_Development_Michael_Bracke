@@ -18,8 +18,6 @@ import com.secret.santa.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.activity_group_detail.*
-import kotlinx.android.synthetic.main.row_add_user.view.*
 import secret.santa.application.models.Group
 import secret.santa.application.models.User
 import secret.santa.application.views.chat.GroupChatLog
@@ -46,7 +44,7 @@ class GroupDetailSSA() : AppCompatActivity() {
             supportActionBar?.title = group.Name;
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             fetchUsersForGroup(group);
-            btnShareGroup.setOnClickListener {
+            /*TODO  btnShareGroup.setOnClickListener {
                 val inviteId = intent.getStringExtra(GroupOverviewSSA.GROUP_INVITE_ID);
                 Log.d("SHARING",inviteId.toString())
                 val intent = Intent(android.content.Intent.ACTION_SEND);
@@ -56,7 +54,7 @@ class GroupDetailSSA() : AppCompatActivity() {
                 val subjectString = "Hier is jouw unieke code : "+ inviteId.toString() +" om te verzilveren in de app! "
                 intent.putExtra(Intent.EXTRA_TEXT, subjectString);
                 startActivity(Intent.createChooser(intent, "Hoe wil iemand uitnodigen?"));
-            }
+            } */
         }
         // het defienieren van de adapter
 
@@ -64,7 +62,7 @@ class GroupDetailSSA() : AppCompatActivity() {
 
 
 
-        recyclerView_groupDetailOverview.adapter = adapter
+        //TODO  recyclerView_groupDetailOverview.adapter = adapter
         val btn = findViewById<Button>(R.id.btnGroupChat)
         btn.setOnClickListener {
             val intent = Intent(this, GroupChatLog::class.java);
@@ -134,7 +132,7 @@ class GroupDetailItem(val user: User) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.tvText.text = user.Name;
+        //TODO  viewHolder.itemView.tvText.text = user.Name;
     }
 
 }

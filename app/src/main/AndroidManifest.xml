@@ -55,6 +55,11 @@
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.AccountMainSSA"></meta-data>
         </activity>
+        <activity android:name=".views.LanguageSSA"
+            android:parentActivityName=".views.AccountMainSSA">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.AccountMainSSA"></meta-data>
+        </activity>
         <activity android:name=".views.AccountFavoCreationSSA"
             android:parentActivityName=".views.AccountFavoListSSA">
             <!-- Door een meta data attr. toe te voegen weet deze view wat zijn parent view is. -->

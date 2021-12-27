@@ -9,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.secret.santa.R
-import kotlinx.android.synthetic.main.activity_login.*
+import com.secret.santa.databinding.ActivityLoginBinding
+import com.secret.santa.databinding.ActivityMainOverviewBinding
 
 
 class LoginSSA : AppCompatActivity() {
@@ -18,15 +19,19 @@ class LoginSSA : AppCompatActivity() {
         val USER_NAME = "USER_NAME"
     }
 
+    private lateinit var binding: ActivityLoginBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+
         // change to the activity login view
-        setContentView(R.layout.activity_login)
+        setContentView(binding.root)
         // create on click event for the login btn
-        textRegistreer.setOnClickListener { RegView(); }
-        btnInloggen.setOnClickListener {  Login(); }
+        binding.textRegistreer.setOnClickListener { RegView(); }
+        binding.btnInloggen.setOnClickListener {  Login(); }
+
         // Write a message to the database
 
 

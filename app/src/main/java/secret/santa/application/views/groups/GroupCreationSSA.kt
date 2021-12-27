@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.secret.santa.R
-import kotlinx.android.synthetic.main.activity_group_creation.*
+
 import secret.santa.application.models.Group
 import secret.santa.application.models.User
 import java.util.*
@@ -37,7 +37,7 @@ class GroupCreationSSA() : AppCompatActivity() {
 
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_group_creation);
-        btnJoinGroup.setOnClickListener { CreateGroup() }
+        //TODO  btnJoinGroup.setOnClickListener { CreateGroup() }
 
 
     }

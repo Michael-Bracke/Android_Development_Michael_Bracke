@@ -23,9 +23,6 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.activity_account_favo_list.*
-import kotlinx.android.synthetic.main.activity_account_overview.*
-import kotlinx.android.synthetic.main.row_add_favo_item.view.*
 import secret.santa.application.models.FavoriteItem
 
 class AccountFavoListSSA() : AppCompatActivity() {
@@ -41,8 +38,8 @@ class AccountFavoListSSA() : AppCompatActivity() {
         supportActionBar?.title = "Verlanglijstje"
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_account_favo_list);
-        Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(imgProfile);
-        btnFavoCreation.setOnClickListener { CreateFavoItem() }
+        //TODO Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(imgProfile);
+        //TODO  btnFavoCreation.setOnClickListener { CreateFavoItem() }
         CheckFavoItemsForUser()
 
 
@@ -77,7 +74,7 @@ class AccountFavoListSSA() : AppCompatActivity() {
                 }
                 // maak het visueel zichtbaar door deze adapter ook te binden
                 // met de recyclerview
-                recyclerView_favoItems.adapter = adapter
+                //TODO   recyclerView_favoItems.adapter = adapter
             }
 
 
@@ -138,11 +135,11 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.tvFavoItem.text = favoriteItem.Name
-        viewHolder.itemView.imgCross.setOnClickListener {
+        //TODO    viewHolder.itemView.tvFavoItem.text = favoriteItem.Name
+        /* TODO   viewHolder.itemView.imgCross.setOnClickListener {
             // set on click listener for deleting an item
         }
-
+*/
     }
 
 }

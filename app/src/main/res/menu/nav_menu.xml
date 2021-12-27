@@ -4,18 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/lang_selector"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        android:title="@string/language_selector"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menuHome"
-        android:title=""
         android:icon="@drawable/ic_home"
+        android:title=""
         app:showAsAction="ifRoom">>
     </item>
     <item
         android:id="@+id/menuGroup"
-        android:title=""
         android:icon="@drawable/ic_group"
+        android:title=""
         app:showAsAction="ifRoom"
-        tools:ignore="MenuTitle">
-    </item>
+        tools:ignore="MenuTitle"></item>
     <item
         android:id="@+id/menuSignOut"
         android:title=""

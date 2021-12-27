@@ -14,9 +14,7 @@ import org.json.JSONArray;
 
 import java.util.UUID;
 
-import kotlinx.android.parcel.Parcelize;
-
-@Parcelize
+// TODO PARCELIZEN VOOR RECYCLERVIEW?
 public class Group implements Parcelable {
     public String Name;
     public Boolean IsActive;

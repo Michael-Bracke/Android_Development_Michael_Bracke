@@ -14,7 +14,7 @@ import com.parse.ParseInstallation
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
-import kotlinx.android.synthetic.main.activity_group_code_fill.*
+
 import org.json.JSONArray
 import secret.santa.application.models.Group
 import secret.santa.application.models.User
@@ -37,13 +37,14 @@ class GroupCodeFillSSA() : AppCompatActivity() {
         // het definiëren van de layout keuze
         setContentView(R.layout.activity_group_code_fill);
 
-       btnJoinGroup.setOnClickListener { JoinGroup(); }
+        //TODO btnJoinGroup.setOnClickListener { JoinGroup(); }
 
 
     }
 
 
     private fun JoinGroup() {
+        /* //TODO
         val text = inptGroupCode.text;
         if (!text.isEmpty()) {
             val ref = FirebaseDatabase.getInstance(getString(R.string.database_instance))
@@ -97,7 +98,7 @@ class GroupCodeFillSSA() : AppCompatActivity() {
         } else {
             inptGroupCode.setError("Gelieve een code in tegeven")
         }
-
+   */
     }
 
 

@@ -10,25 +10,29 @@ import com.google.firebase.auth.FirebaseAuth
 import com.secret.santa.R
 import com.parse.ParseInstallation
 import com.parse.ParseUser
+import com.secret.santa.databinding.ActivityAccountOverviewBinding
+import com.secret.santa.databinding.ActivityLanguagePickerBinding
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_account_overview.*
 
 class AccountMainSSA() : AppCompatActivity() {
 
+    private lateinit var binding: ActivityAccountOverviewBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
+        binding = ActivityAccountOverviewBinding.inflate(layoutInflater)
         supportActionBar?.title = "Account"
         // de juiste config. aanroepen om te kunnen verbinden met DB
         ParseInstallation.getCurrentInstallation().saveInBackground();
         // het definiëren van de layout keuze
-        setContentView(R.layout.activity_account_overview);
-        btnAccountFavoList.setOnClickListener { GoToAccountFavoList() }
-        btnAccountPersonal.setOnClickListener { GoToAccountDetails() }
-        Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(imgProfileAccount);
+        setContentView(binding.root);
+
+        binding.btnAccountFavoList.setOnClickListener { GoToAccountFavoList() }
+        binding.btnAccountPersonal.setOnClickListener { GoToAccountDetails() }
+        Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(binding.imgProfileAccount);
 
     }
 

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_group_list_overview.xml" value="0.360054347826087" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_language_picker.xml" value="0.360054347826087" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_login.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_main_overview.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/menu/nav_menu.xml" value="0.21354166666666666" />
+      </map>
+    </option>
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>

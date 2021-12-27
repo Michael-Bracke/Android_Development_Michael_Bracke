@@ -9,27 +9,30 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
-import kotlinx.android.synthetic.main.activity_main_overview.*
+import com.secret.santa.databinding.ActivityMainOverviewBinding
 
 
 class MainSSA() : AppCompatActivity() {
 
     var serviceItent = Intent();
+    private lateinit var binding: ActivityMainOverviewBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
+        binding = ActivityMainOverviewBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         supportActionBar?.title = "Homepagina"
         // het definiëren van de layout keuze
-        setContentView(R.layout.activity_main_overview)
         // de juiste config. aanroepen om te kunnen verbinden met DB
         val uid = FirebaseAuth.getInstance().uid ?: "";
         val name = FirebaseDatabase.getInstance(getString(R.string.database_instance)).getReference("users").child(uid).child("name");
-        welcomeText.text = "Welkom, " + FirebaseAuth.getInstance().currentUser?.displayName + "!"
-        btnAccount.setOnClickListener{ GoToAccountDetail();}
-        btnGroupOverview.setOnClickListener{ GoToGroupDetail();}
+        binding.welcomeText.text = "Welkom, " + FirebaseAuth.getInstance().currentUser?.displayName + "!"
+        binding.btnAccount.setOnClickListener{ GoToAccountDetail();}
+        binding.btnGroupOverview.setOnClickListener{ GoToGroupDetail();}
     }
 
 
@@ -66,6 +69,10 @@ class MainSSA() : AppCompatActivity() {
             }
             R.id.menuHome -> {
                 val intent = Intent(this, MainSSA::class.java)
+                startActivity(intent);
+            }
+            R.id.lang_selector -> {
+                val intent = Intent(this, LanguageSSA::class.java)
                 startActivity(intent);
             }
         }

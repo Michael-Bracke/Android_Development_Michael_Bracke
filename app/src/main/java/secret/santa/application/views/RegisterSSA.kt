@@ -17,7 +17,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.parse.ParseInstallation
 import com.secret.santa.R
-import kotlinx.android.synthetic.main.activity_register.*
+import com.secret.santa.databinding.ActivityMainOverviewBinding
+import com.secret.santa.databinding.ActivityRegisterBinding
 import secret.santa.application.services.MusicServiceSSA
 import java.util.*
 
@@ -25,31 +26,35 @@ import java.util.*
 class RegisterSSA() : AppCompatActivity() {
 
     var serviceItent = Intent();
-
+    private lateinit var binding: ActivityRegisterBinding
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
-
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        val view = binding.root
         // het definiëren van de layout keuze
-        setContentView(R.layout.activity_register)
+        setContentView(view)
         // de juiste config. aanroepen om te kunnen verbinden met DB
         ParseInstallation.getCurrentInstallation().saveInBackground();
-        alreadyHaveAccountText.setOnClickListener { this.HaveAcc(); }
-        btnRegister.setOnClickListener {
+        binding.alreadyHaveAccountText.setOnClickListener { this.HaveAcc(); }
+        binding.btnRegister.setOnClickListener {
             try {
                 this.Registeren();
             } catch (ex: Exception) {
             }
         }
 
+
+
         // set een onclick event listerer voor de 'selecteer foto' button
-        fotoSelector.setOnClickListener{
+        binding.fotoSelector.setOnClickListener{
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0);
         }
+
         // MUSICA MAESTROOOO
         // hier maken we service effectief aan (onCreate method)
         serviceItent = Intent(applicationContext, MusicServiceSSA::class.java);
@@ -68,8 +73,8 @@ class RegisterSSA() : AppCompatActivity() {
            selectedFotoUri = data.data;
            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedFotoUri)
            val bitmapDrawable = BitmapDrawable(bitmap)
-           fotoSelector.background = bitmapDrawable;
-           fotoSelector.text = "";
+           binding.fotoSelector.background = bitmapDrawable;
+           binding.fotoSelector.text = "";
        }
     }
 
