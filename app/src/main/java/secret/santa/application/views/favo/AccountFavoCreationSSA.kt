@@ -30,7 +30,7 @@ class AccountFavoCreationSSA() : AppCompatActivity() {
         binding = ActivityAccountFavoCreationBinding.inflate(layoutInflater)
         // de juiste config. aanroepen om te kunnen verbinden met DB
         // het definiëren van de layout keuze
-        setContentView(R.layout.activity_account_favo_creation);
+        setContentView(binding.root);
         binding.btnAddFavoItem.setOnClickListener { CreateFavoItem() }
     }
 
