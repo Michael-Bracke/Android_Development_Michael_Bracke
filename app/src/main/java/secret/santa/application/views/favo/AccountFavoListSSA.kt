@@ -22,31 +22,34 @@ import com.parse.ParseQuery
 import com.parse.ParseUser
 import com.secret.santa.databinding.ActivityAccountFavoCreationBinding
 import com.secret.santa.databinding.ActivityAccountFavoListBinding
+import com.secret.santa.databinding.ActivityAccountFavoListFragmentsBinding
 import com.secret.santa.databinding.ActivityGroupCodeFillBinding
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import secret.santa.application.models.FavoriteItem
+import secret.santa.application.views.favo.FavoriteFragment
+import kotlin.concurrent.fixedRateTimer
 
 class AccountFavoListSSA() : AppCompatActivity() {
 
     // het definiëren van de adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
-    private lateinit var binding: ActivityAccountFavoListBinding
+    private lateinit var binding: ActivityAccountFavoListFragmentsBinding
 
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
-        binding = ActivityAccountFavoListBinding.inflate(layoutInflater)
+        binding = ActivityAccountFavoListFragmentsBinding.inflate(layoutInflater)
         supportActionBar?.title = "Verlanglijstje"
         // het definiëren van de layout keuze
-        setContentView(R.layout.activity_account_favo_list);
+        setContentView(binding.root);
         Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(binding.imgProfile);
         binding.btnFavoCreation.setOnClickListener { CreateFavoItem() }
-        CheckFavoItemsForUser()
+        //CheckFavoItemsForUser()
 
 
     }
@@ -56,6 +59,7 @@ class AccountFavoListSSA() : AppCompatActivity() {
         startActivity(intent);
     }
 
+    /*
 
     private fun CheckFavoItemsForUser() {
 
@@ -80,22 +84,26 @@ class AccountFavoListSSA() : AppCompatActivity() {
                 }
                 // maak het visueel zichtbaar door deze adapter ook te binden
                 // met de recyclerview
-                binding.recyclerViewFavoItems.adapter = adapter
+                binding.fragment =
+               // binding.recyclerViewFavoItems.adapter = adapter
             }
 
 
         })
     }
 
+    */
 
     private fun DeleteFavoItem(id: String) {
         val query = ParseQuery.getQuery<ParseObject>("FavoriteItems")
+
         // Retrieve the object by id
         query.whereEqualTo("objectId", id)
         var results = query.find();
         results.forEach() {
             it.deleteInBackground()
-            CheckFavoItemsForUser()
+
+           // reload function to check update
         }
     }
 
@@ -143,8 +151,7 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.tvFavoItem).text = favoriteItem.Name
         viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
-            // set on click listener for deleting an item
+            // delete the required items
         }
     }
-
 }
