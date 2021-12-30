@@ -26,6 +26,7 @@ import com.secret.santa.views.AccountFavoListSSA
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import java.util.logging.Logger
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -119,7 +120,7 @@ public fun DeleteFavoItem(id: String) {
 }
 
 
-class FavoItem(val favoriteItem: FavoriteItem, val frag: Fragment) : Item<GroupieViewHolder>() {
+class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
     // get the layout you want to have each item to be filled in
     // the 'temp' file
     override fun getLayout(): Int {
@@ -133,10 +134,9 @@ class FavoItem(val favoriteItem: FavoriteItem, val frag: Fragment) : Item<Groupi
         viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
             // set on click listener for deleting an item
             DeleteFavoItem(viewHolder.item.id.toString())
-            viewHolder.itemView.context
 
-            (activity as FavoriteFragment).CheckFavoItemsForUser(viewHolder.itemView)
-            (getActivity() as FavoriteFragment).CheckFavoItemsForUser(viewHolder.itemView)
+            val x = viewHolder.itemView.context as FavoriteFragment
+            x.adapter.notifyDataSetChanged()
         }
     }
 }
