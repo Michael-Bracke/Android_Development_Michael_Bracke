@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout-land/activity_login.xml" value="0.18077601410934743" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_account_favo_list.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_account_favo_list_FRAGMENTS.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_account_favo_list_fragments.xml" value="0.25" />
@@ -17,7 +18,9 @@
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/row_add_favo_item.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/row_chat_add_message_other.xml" value="0.25" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/row_chat_add_message_self.xml" value="0.19322916666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/switch_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/menu/nav_menu.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/menu/nav_menu_login_reg.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

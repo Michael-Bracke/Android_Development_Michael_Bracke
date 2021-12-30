@@ -136,10 +136,6 @@ class LanguageSSA() : AppCompatActivity() {
                 val intent = Intent(this, LanguageSSA::class.java)
                 startActivity(intent);
             }
-            R.id.lang_selector -> {
-                val intent = Intent(this, LanguageSSA::class.java)
-                startActivity(intent);
-            }
         }
       return super.onOptionsItemSelected(item);
     }

@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
 import com.secret.santa.databinding.ActivityMainOverviewBinding
+import secret.santa.application.services.MusicServiceSSA
 
 
 class MainSSA() : AppCompatActivity() {
@@ -33,6 +34,7 @@ class MainSSA() : AppCompatActivity() {
         binding.welcomeText.text = "Welkom, " + FirebaseAuth.getInstance().currentUser?.displayName + "!"
         binding.btnAccount.setOnClickListener{ GoToAccountDetail();}
         binding.btnGroupOverview.setOnClickListener{ GoToGroupDetail();}
+        startService(Intent(applicationContext, MusicServiceSSA::class.java))
     }
 
 
@@ -69,10 +71,6 @@ class MainSSA() : AppCompatActivity() {
             }
             R.id.menuHome -> {
                 val intent = Intent(this, MainSSA::class.java)
-                startActivity(intent);
-            }
-            R.id.lang_selector -> {
-                val intent = Intent(this, LanguageSSA::class.java)
                 startActivity(intent);
             }
         }

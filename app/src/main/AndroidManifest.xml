@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".views.RegisterSSA">
+        <activity android:name=".views.RegisterSSA" android:process=":test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -81,10 +81,10 @@
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.GroupOverviewSSA"></meta-data>
         </activity>
-        <service android:name="secret.santa.application.services.MusicServiceSSA"></service>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <service android:name="secret.santa.application.services.MusicServiceSSA"></service>
     </application>
 
 </manifest>

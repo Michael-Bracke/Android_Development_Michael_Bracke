@@ -4,11 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/lang_selector"
-        android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="@string/language_selector"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/menuHome"
         android:icon="@drawable/ic_home"
         android:title=""
