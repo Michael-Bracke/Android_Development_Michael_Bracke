@@ -47,7 +47,7 @@ class AccountFavoListSSA() : AppCompatActivity() {
         supportActionBar?.title = "Verlanglijstje"
         // het definiëren van de layout keuze
         setContentView(binding.root);
-        Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(binding.imgProfile);
+        //Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl).into(binding.imgProfile);
         binding.btnFavoCreation.setOnClickListener { CreateFavoItem() }
         //CheckFavoItemsForUser()
 
