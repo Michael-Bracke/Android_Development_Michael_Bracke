@@ -1,17 +1,26 @@
 package com.secret.santa.views
 
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.CompoundButton
+import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.parse.ParseUser
 import com.secret.santa.R
 import com.secret.santa.databinding.ActivityLoginBinding
 import com.secret.santa.databinding.ActivityMainOverviewBinding
-
+import secret.santa.application.services.MusicServiceSSA
+import secret.santa.application.extensions.isMyServiceRunning
 
 class LoginSSA : AppCompatActivity() {
 
@@ -20,6 +29,44 @@ class LoginSSA : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityLoginBinding
+
+
+    // STANDARD FUNCT TO IMPLEMENT ON EACH VIEW
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // item.itemId = de id dat aan de items zijn gelinkt in het menu dat je hebt aangemaakt
+        when (item?.itemId) {
+            // SWITCH CASE
+            R.id.sound_switch -> {
+                Log.e("menubar", "clicked sound switch!")
+
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    // create the overal options menu ( just the layout )
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.nav_menu_login_reg, menu);
+        val toggleService = menu?.findItem(R.id.sound_switch);
+        val switch = toggleService?.actionView as Switch
+        //check of de music reeds gestart is zet de initiele switch naargelang de uitkomt
+        if(applicationContext.isMyServiceRunning(MusicServiceSSA::class.java))
+            switch.setChecked(true);
+        switch.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
+            override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                // Start or stop your Service
+                var musicService = Intent(applicationContext, MusicServiceSSA::class.java)
+                if(!isChecked) {
+                    stopService(musicService);
+                } else {
+                    startService(musicService);
+                }
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
