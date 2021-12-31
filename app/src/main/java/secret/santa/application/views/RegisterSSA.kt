@@ -29,13 +29,14 @@ import java.util.*
 import android.widget.CompoundButton
 import com.google.firebase.FirebaseApp
 import secret.santa.application.SQLite.DbAdapter
+import secret.santa.application.services.AuthService
 
 
 class RegisterSSA() : AppCompatActivity() {
 
     var serviceItent = Intent();
     var helper: DbAdapter? = null
-
+    var AuthService: AuthService? = null
     private lateinit var binding: ActivityRegisterBinding
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
@@ -59,7 +60,7 @@ class RegisterSSA() : AppCompatActivity() {
 
         // init de dbAdapter met huidige context in constr.
         helper = DbAdapter(this)
-
+        AuthService = AuthService()
 
         // set een onclick event listerer voor de 'selecteer foto' button
         binding.fotoSelector.setOnClickListener{
@@ -96,55 +97,17 @@ class RegisterSSA() : AppCompatActivity() {
 
 
     // effectief registreren naar parseDB
-    private fun Registeren() {
-        val regName = binding.inptName
-        val regEmail =  binding.inptEmail
-        val regPasswrd =  binding.inptPassword
-        if (TextUtils.isEmpty(regName.text)) {
-            regName.setError("Naam is verplicht!")
-        } else if (TextUtils.isEmpty(regEmail.text)) {
-            regEmail.setError("Email is verplicht!")
-        } else if (TextUtils.isEmpty(regPasswrd.text)) {
-            regPasswrd.setError("Wachtwoord is verplicht!")
-        } else {
+    public fun Registeren() {
+        val regName = binding.inptName.text.toString()
+        val regEmail =  binding.inptEmail.text.toString()
+        val regPasswrd =  binding.inptPassword.text.toString()
 
-            // create new ParseUser to be stored in DB
-            Log.d("USERCREATION", regEmail.text.toString().trim())
-            Log.d("USERCREATION", regPasswrd.text.toString().trim())
-            try {
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                    regEmail.text.toString().trim(),
-                    regPasswrd.text.toString().trim()
-                )
-                    .addOnCanceledListener {
-                        Log.d("USERCREATION", "CANCELED")
-                    }
-                    .addOnCompleteListener {
-                        Log.d("USERCREATION", "COMPLETED STORAGE")
-                        if (!it.isSuccessful) {
-                            it.addOnFailureListener {
-                                Log.d("USERCREATION", it.message.toString())
-                            }
-                            regPasswrd.error = it.toString()
-                            return@addOnCompleteListener
-                        }
-                        Log.e("USERCREATION", "UPLOADING IMAGE TO FIREBASE STORAGE...")
-                        uploadImageToFirebaseStorage()
-                        // wat dan op zijn beurt de actieve layout rendering zal aanpassen
+        var result = AuthService!!.Register(regName, regEmail, regPasswrd)
 
-                    }
-                    .addOnFailureListener {
-                        Log.e("USERCREATION", "" + it.message)
-
-                        regEmail.error = it.message
-                    }
-
-            }catch (ex : Exception){
-                Log.e("USERCREATION", "" + ex)
-
-            }
-        }
-
+        if(result == "SUCCESS")
+            uploadImageToFirebaseStorage()
+        else
+            binding.tvError.text = result
     }
 
     // veranderen van actieve layout view
