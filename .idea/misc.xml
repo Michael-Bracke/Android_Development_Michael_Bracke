@@ -3,6 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/custom_menu_toolbar.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_group.xml" value="0.2140625" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_home.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/ic_sign_out.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/rounded_btn_black.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/rounded_circle_white.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/rounded_text_header.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/rounded_text_light_blue.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/drawable/rounded_text_white.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout-land/activity_login.xml" value="0.18077601410934743" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_account_favo_list.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/michael.bracke/Documents/Personal/EHB/Android_Development/Android_Development/app/src/main/res/layout/activity_account_favo_list_FRAGMENTS.xml" value="0.19322916666666667" />
