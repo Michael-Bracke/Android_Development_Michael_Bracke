@@ -19,6 +19,7 @@ import com.parse.ParseUser
 import com.secret.santa.R
 import com.secret.santa.databinding.ActivityLoginBinding
 import com.secret.santa.databinding.ActivityMainOverviewBinding
+import secret.santa.application.SQLite.DbAdapter
 import secret.santa.application.services.MusicServiceSSA
 import secret.santa.application.extensions.isMyServiceRunning
 
@@ -29,6 +30,7 @@ class LoginSSA : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityLoginBinding
+    var helper: DbAdapter? = null
 
 
     // STANDARD FUNCT TO IMPLEMENT ON EACH VIEW
@@ -72,16 +74,15 @@ class LoginSSA : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-
+        helper = DbAdapter(this)
         // change to the activity login view
         setContentView(binding.root)
         // create on click event for the login btn
         binding.textRegistreer.setOnClickListener { RegView(); }
         binding.btnInloggen.setOnClickListener {  Login(); }
 
-        // Write a message to the database
-
-
+        // get data from db and log it
+        Log.e("DATA", ""+helper!!.data)
     }
 
     private fun RegView(){

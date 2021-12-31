@@ -34,7 +34,6 @@ class MainSSA() : AppCompatActivity() {
         binding.welcomeText.text = "Welkom, " + FirebaseAuth.getInstance().currentUser?.displayName + "!"
         binding.btnAccount.setOnClickListener{ GoToAccountDetail();}
         binding.btnGroupOverview.setOnClickListener{ GoToGroupDetail();}
-        startService(Intent(applicationContext, MusicServiceSSA::class.java))
     }
 
 

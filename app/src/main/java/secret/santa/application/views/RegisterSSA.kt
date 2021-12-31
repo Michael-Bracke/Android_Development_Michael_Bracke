@@ -27,14 +27,14 @@ import secret.santa.application.extensions.isMyServiceRunning
 import secret.santa.application.services.MusicServiceSSA
 import java.util.*
 import android.widget.CompoundButton
-
-
-
+import com.google.firebase.FirebaseApp
+import secret.santa.application.SQLite.DbAdapter
 
 
 class RegisterSSA() : AppCompatActivity() {
 
     var serviceItent = Intent();
+    var helper: DbAdapter? = null
 
     private lateinit var binding: ActivityRegisterBinding
     @Override
@@ -44,6 +44,9 @@ class RegisterSSA() : AppCompatActivity() {
         // overerven van param
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
+        // het definiëren van de layout keuze
+        setContentView(binding.root)
+        FirebaseApp.initializeApp(binding.root.context)
         // de juiste config. aanroepen om te kunnen verbinden met DB
         ParseInstallation.getCurrentInstallation().saveInBackground();
         binding.alreadyHaveAccountText.setOnClickListener { this.HaveAcc(); }
@@ -54,6 +57,8 @@ class RegisterSSA() : AppCompatActivity() {
             }
         }
 
+        // init de dbAdapter met huidige context in constr.
+        helper = DbAdapter(this)
 
 
         // set een onclick event listerer voor de 'selecteer foto' button
@@ -69,8 +74,7 @@ class RegisterSSA() : AppCompatActivity() {
         serviceItent = Intent(binding.root.context, MusicServiceSSA::class.java);
         startService(serviceItent);
 
-        // het definiëren van de layout keuze
-        setContentView(binding.root)
+
     }
     // init de uri om later controle op te doen tijdens het registreren.
     var selectedFotoUri: Uri? = null
@@ -93,9 +97,9 @@ class RegisterSSA() : AppCompatActivity() {
 
     // effectief registreren naar parseDB
     private fun Registeren() {
-        val regName = findViewById<TextView>(R.id.inptName)
-        val regEmail = findViewById<TextView>(R.id.inptEmail)
-        val regPasswrd = findViewById<TextView>(R.id.inptPassword)
+        val regName = binding.inptName
+        val regEmail =  binding.inptEmail
+        val regPasswrd =  binding.inptPassword
         if (TextUtils.isEmpty(regName.text)) {
             regName.setError("Naam is verplicht!")
         } else if (TextUtils.isEmpty(regEmail.text)) {
@@ -103,24 +107,42 @@ class RegisterSSA() : AppCompatActivity() {
         } else if (TextUtils.isEmpty(regPasswrd.text)) {
             regPasswrd.setError("Wachtwoord is verplicht!")
         } else {
+
             // create new ParseUser to be stored in DB
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(regEmail.text.toString().trim(),regPasswrd.text.toString().trim())
-                .addOnCompleteListener{
-                if(!it.isSuccessful) {
-                    it.addOnFailureListener {
-                        Log.d("USERCREATION", it.message.toString())
+            Log.d("USERCREATION", regEmail.text.toString().trim())
+            Log.d("USERCREATION", regPasswrd.text.toString().trim())
+            try {
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                    regEmail.text.toString().trim(),
+                    regPasswrd.text.toString().trim()
+                )
+                    .addOnCanceledListener {
+                        Log.d("USERCREATION", "CANCELED")
                     }
-                    regPasswrd.setError(it.toString())
-                    return@addOnCompleteListener
-                }
-                    uploadImageToFirebaseStorage()
-                    // wat dan op zijn beurt de actieve layout rendering zal aanpassen
+                    .addOnCompleteListener {
+                        Log.d("USERCREATION", "COMPLETED STORAGE")
+                        if (!it.isSuccessful) {
+                            it.addOnFailureListener {
+                                Log.d("USERCREATION", it.message.toString())
+                            }
+                            regPasswrd.error = it.toString()
+                            return@addOnCompleteListener
+                        }
+                        Log.e("USERCREATION", "UPLOADING IMAGE TO FIREBASE STORAGE...")
+                        uploadImageToFirebaseStorage()
+                        // wat dan op zijn beurt de actieve layout rendering zal aanpassen
+
+                    }
+                    .addOnFailureListener {
+                        Log.e("USERCREATION", "" + it.message)
+
+                        regEmail.error = it.message
+                    }
+
+            }catch (ex : Exception){
+                Log.e("USERCREATION", "" + ex)
 
             }
-                .addOnFailureListener{
-                    regEmail.setError(it.message)
-                }
-
         }
 
     }
@@ -134,8 +156,10 @@ class RegisterSSA() : AppCompatActivity() {
     private fun uploadImageToFirebaseStorage(){
         // user dont have to choose a picture, choose standard avater when not chosen anything
         // TODO: Give user the option in a latter version to change picture
+
         if(selectedFotoUri == null) {
                 FirebaseStorage.getInstance().getReference("/images/ssst_santa_img.jpg").downloadUrl.addOnSuccessListener {
+                    Log.e("USERCREATION", "SAVING USER TO FIREBASE DATABASE STORAGE...")
                     saveUserToFireBaseDatabase(it.toString());
                 }
         } else {
@@ -169,6 +193,10 @@ class RegisterSSA() : AppCompatActivity() {
                 .setPhotoUri(Uri.parse(profileImageUrl))
                 .build()
         if(user != null) {
+
+            // wanneer registratie succesvol, slaag de user ook op in eigen database
+             helper!!.insertData(regName,profileImageUrl,user.uid)
+
             user.updateProfile(profileUpdates)
                 .addOnSuccessListener {
                     Log.d("USERCREATION" , "SUCCESVOL OPGESLAGEN")
