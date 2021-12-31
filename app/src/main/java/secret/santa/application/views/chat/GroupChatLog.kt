@@ -35,8 +35,9 @@ class GroupChatLog() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // overerven van param
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+
         binding = ActivityGroupChatLogBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         // get group data
         val group = intent.getParcelableExtra<Group>(GroupDetailSSA.GROUP)
 
