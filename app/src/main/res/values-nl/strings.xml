@@ -27,4 +27,11 @@
     <string name="Message_Group_Header">Groep chat</string>
     <string name="Chat_Group">Group Chat</string>
     <string name="Message_Send">Versturen</string>
+
+    <!-- error messages -->
+
+    <string name="Name_Error">Gelieve je naam na te kijken</string>
+    <string name="Email_Error">Gelieve je email na te kijken</string>
+    <string name="Pass_Error">Gelieve je wachtwoord na te kijken</string>
+
 </resources>

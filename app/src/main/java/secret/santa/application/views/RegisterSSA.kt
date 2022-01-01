@@ -4,11 +4,9 @@ package com.secret.santa.views
 import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -17,11 +15,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.parse.ParseInstallation
 import com.secret.santa.R
-import com.secret.santa.databinding.ActivityMainOverviewBinding
 import com.secret.santa.databinding.ActivityRegisterBinding
 import secret.santa.application.extensions.isMyServiceRunning
 import secret.santa.application.services.MusicServiceSSA
@@ -102,12 +98,14 @@ class RegisterSSA() : AppCompatActivity() {
         val regEmail =  binding.inptEmail.text.toString()
         val regPasswrd =  binding.inptPassword.text.toString()
 
-        var result = AuthService!!.Register(regName, regEmail, regPasswrd)
-
-        if(result == "SUCCESS")
-            uploadImageToFirebaseStorage()
-        else
-            binding.tvError.text = result
+        AuthService!!.Register(regName, regEmail, regPasswrd) {
+            // passed though the oncompletedlistener from service
+            // if true then the user has been succesfully registered
+            result -> when(result){
+                "SUCCESS" -> uploadImageToFirebaseStorage()
+                else -> binding.tvError.text = result
+            }
+        }
     }
 
     // veranderen van actieve layout view

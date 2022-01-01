@@ -28,5 +28,11 @@
     <string name="Chat_Group">Group Chat</string>
     <string name="Message_Send">Send</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- error messages -->
+
+    <string name="Name_Error">Please check your name</string>
+    <string name="Email_Error">Please check your email</string>
+    <string name="Pass_Error">Please check your password</string>
+
 </resources>
