@@ -17,16 +17,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.secret.santa.R
-import com.secret.santa.views.FavoItem
 import secret.santa.application.models.FavoriteItem
 
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.parse.ParseObject
 import com.parse.ParseQuery
-import com.secret.santa.views.AccountFavoCreationSSA
-import com.secret.santa.views.AccountFavoListSSA
-import com.secret.santa.views.LoginSSA
+import com.secret.santa.views.*
+import com.secret.santa.views.FavoItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -49,6 +47,14 @@ private const val ARG_PARAM2 = "param2"
 
 
 public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
+
+    companion object {
+        val FAVO_ID = "FAVO_ID"
+        val FAVO_NAME = "FAVO_NAME"
+        val FAVO = "FAVO_"
+        val TAG = "FAVO_OVERVIEW"
+    }
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -60,6 +66,8 @@ public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // indien je zaken hebt in je view
+        val recyclerView = view.findViewById<View>(R.id.recyclerView_favoItems) as RecyclerView
+        recyclerView.adapter = adapter
 
         CheckFavoItemsForUser(view)
 
@@ -97,6 +105,23 @@ public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                         adapter.add(FavoItem(favoItem))
                     }
                 }
+
+
+                adapter.setOnItemClickListener{
+                    // item refereerd naar het item dat effectief gerenderd wordt
+                        item, view->
+                    // cast the item to the item we want to use
+                    val groupitem = item as secret.santa.application.views.favo.FavoItem
+                    // create the intent to start the next activity
+                    val intent = Intent(view.context, FavoriteDetail::class.java)
+                    // send extra params
+                    intent.putExtra(FAVO_ID, item.favoriteItem.id)
+                    intent.putExtra(FAVO_NAME, item.favoriteItem.Name)
+
+                    startActivity(intent)
+
+                }
+
                 // maak het visueel zichtbaar door deze adapter ook te binden
                 // met de recyclerview
                 val recyclerView = view.findViewById<View>(R.id.recyclerView_favoItems) as RecyclerView
@@ -134,11 +159,9 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
     public fun SetFragment(frag: Fragment){
 
     }
+
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.tvFavoItem).text = favoriteItem.Name
-        viewHolder.itemView.setOnClickListener { v : View ->
-            Log.d("FavoriteItem", favoriteItem.Name)
-        }
         viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
             // set on click listener for deleting an item
             DeleteFavoItem(viewHolder.item.id.toString())
