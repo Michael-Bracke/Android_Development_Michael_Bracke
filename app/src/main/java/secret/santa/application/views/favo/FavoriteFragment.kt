@@ -2,7 +2,9 @@ package secret.santa.application.views.favo
 
 import android.app.PendingIntent.getActivity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +24,9 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.parse.ParseObject
 import com.parse.ParseQuery
+import com.secret.santa.views.AccountFavoCreationSSA
 import com.secret.santa.views.AccountFavoListSSA
+import com.secret.santa.views.LoginSSA
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -52,6 +56,7 @@ public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     var accountFavoListSSA : AccountFavoListSSA? = null
 
     val adapter = GroupAdapter<GroupieViewHolder>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // indien je zaken hebt in je view
@@ -131,6 +136,9 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
     }
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.tvFavoItem).text = favoriteItem.Name
+        viewHolder.itemView.setOnClickListener { v : View ->
+            Log.d("FavoriteItem", favoriteItem.Name)
+        }
         viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
             // set on click listener for deleting an item
             DeleteFavoItem(viewHolder.item.id.toString())

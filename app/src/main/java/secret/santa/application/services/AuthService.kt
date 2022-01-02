@@ -1,5 +1,6 @@
 package secret.santa.application.services
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
@@ -26,18 +27,15 @@ import com.parse.Parse.getApplicationContext
 
 class AuthService {
 
-    companion object {
-        val resSystem = getApplicationContext().getResources()
-    }
 
-     fun Register( name:String, email:String, pass: String, callback: (String) -> Unit): String {
+     fun Register( name:String, email:String, pass: String, context: Context, callback: (String) -> Unit): String {
         if (name.isNullOrEmpty()) {
-            callback(resSystem.getString(R.string.Name_Error))
+            callback(context.getString(R.string.Name_Error))
         } else if (email.isNullOrEmpty()) {
-            callback(resSystem.getString(R.string.Email_Error))
+            callback(context.getString(R.string.Email_Error))
             // TODO adding correct checks for email
         } else if (pass.isNullOrEmpty()) {
-            callback(resSystem.getString(R.string.Pass_Error))
+            callback(context.getString(R.string.Pass_Error))
         }
          // when everything is filled in correctly
          try {

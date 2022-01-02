@@ -22,6 +22,8 @@ import secret.santa.application.models.Group
 
 class GroupChatLog() : AppCompatActivity() {
 
+
+
     // STATISCHE CONTENT DAT VAN OVERAL KAN OPGEVRAAGD WORDEN
     companion object{
         // handig als prefix voor logging
@@ -59,6 +61,8 @@ class GroupChatLog() : AppCompatActivity() {
     }
 
     private fun performSendMessage(group:Group) {
+
+
       val ref =   FirebaseDatabase.getInstance(getString(R.string.database_instance)).getReference("/group-messages").push()
         // push zorgt ervoor dat deze iedere keer een unique id krijgt
 

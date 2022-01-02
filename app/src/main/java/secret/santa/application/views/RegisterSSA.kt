@@ -98,7 +98,7 @@ class RegisterSSA() : AppCompatActivity() {
         val regEmail =  binding.inptEmail.text.toString()
         val regPasswrd =  binding.inptPassword.text.toString()
 
-        AuthService!!.Register(regName, regEmail, regPasswrd) {
+        AuthService!!.Register(regName, regEmail, regPasswrd, binding.root.context) {
             // passed though the oncompletedlistener from service
             // if true then the user has been succesfully registered
             result -> when(result){
