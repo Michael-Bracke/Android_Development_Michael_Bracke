@@ -1,5 +1,8 @@
 package secret.santa.application.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.parse.ParseObject;
 
 
@@ -10,7 +13,6 @@ public class FavoriteItem {
     public Boolean IsActive;
     public String Link;
     public String id;
-
 
     public FavoriteItem(String name, Boolean isActive, String userID, String extraText, String link) {
         this.Name = name;

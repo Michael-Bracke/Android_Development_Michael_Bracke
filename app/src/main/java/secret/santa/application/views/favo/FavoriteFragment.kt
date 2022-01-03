@@ -165,7 +165,6 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
         viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
             // set on click listener for deleting an item
             DeleteFavoItem(viewHolder.item.id.toString())
-
             val x = viewHolder.itemView.context as FavoriteFragment
             x.adapter.notifyDataSetChanged()
         }

@@ -36,5 +36,6 @@
     <string name="Favo_Edit">Edit</string>
     <string name="Favo_Active">Is Active</string>
     <string name="Favo_Link">Link</string>
+    <string name="Favo_Save">Save</string>
 
 </resources>

@@ -67,9 +67,15 @@
                android:value=".views.AccountFavoListSSA"></meta-data>
         </activity>
         <activity android:name="secret.santa.application.views.favo.FavoriteDetail"
+            android:launchMode="singleTask"
             android:parentActivityName=".views.AccountFavoListSSA">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.AccountFavoListSSA"></meta-data>
+        </activity>
+        <activity android:name="secret.santa.application.views.favo.FavoriteEdit"
+            android:parentActivityName="secret.santa.application.views.favo.FavoriteDetail">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="secret.santa.application.views.favo.FavoriteDetail"></meta-data>
         </activity>
         <activity android:name=".views.GroupOverviewSSA"
             android:parentActivityName=".views.MainSSA">

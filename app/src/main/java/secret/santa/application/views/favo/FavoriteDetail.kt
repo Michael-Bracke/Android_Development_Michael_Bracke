@@ -32,5 +32,13 @@ class FavoriteDetail() : AppCompatActivity() {
         val favoId = intent.getStringExtra(FavoriteFragment.FAVO_ID)
         // haal correcte favoriteItem op met al zijn eigenschappen
         binding.txtItemNameValue.text = favoName
+        binding.btnFavoEdit.setOnClickListener {
+            val intent = Intent(binding.root.context, FavoriteEdit::class.java)
+            // send extra paramstest²
+            intent.putExtra(FavoriteFragment.FAVO_ID,favoId)
+            startActivity(intent)
+        }
+
+
     }
 }
