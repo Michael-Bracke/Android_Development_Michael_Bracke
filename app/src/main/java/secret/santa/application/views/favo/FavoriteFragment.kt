@@ -111,7 +111,7 @@ public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                     // item refereerd naar het item dat effectief gerenderd wordt
                         item, view->
                     // cast the item to the item we want to use
-                    val groupitem = item as secret.santa.application.views.favo.FavoItem
+                    val favItem = item as FavoItem
                     // create the intent to start the next activity
                     val intent = Intent(view.context, FavoriteDetail::class.java)
                     // send extra params

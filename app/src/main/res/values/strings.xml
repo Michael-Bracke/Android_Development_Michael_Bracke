@@ -34,5 +34,9 @@
     <string name="Name_Error">Please check your name</string>
     <string name="Email_Error">Please check your email</string>
     <string name="Pass_Error">Please check your password</string>
+    <string name="Favo_Edit">Edit</string>
+    <string name="Favo_Active">Is Active</string>
+    <string name="Favo_Link">Link</string>
+    <string name="Favo_Extra_Text">Extra info</string>
 
 </resources>

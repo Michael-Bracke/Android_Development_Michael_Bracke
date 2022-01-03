@@ -33,5 +33,8 @@
     <string name="Name_Error">Gelieve je naam na te kijken</string>
     <string name="Email_Error">Gelieve je email na te kijken</string>
     <string name="Pass_Error">Gelieve je wachtwoord na te kijken</string>
+    <string name="Favo_Edit">Edit</string>
+    <string name="Favo_Active">Is Active</string>
+    <string name="Favo_Link">Link</string>
 
 </resources>
