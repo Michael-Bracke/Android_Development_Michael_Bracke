@@ -83,7 +83,7 @@ class LoginSSA : AppCompatActivity() {
 
         // get data from db and log it
         Log.e("DATA", ""+helper!!.data)
-        
+
         // MUSICA MAESTROOOO
         Log.e("Service", "Musicservice wordt gestart...")
         val serviceItent = Intent(binding.root.context, MusicServiceSSA::class.java);
