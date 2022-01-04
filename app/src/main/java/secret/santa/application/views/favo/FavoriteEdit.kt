@@ -45,7 +45,6 @@ class FavoriteEdit() : AppCompatActivity() {
         val favoId = intent.getStringExtra(FavoriteFragment.FAVO_ID)
         Log.e("FAVOITEMEDIT", ""+favoId)
         if(!favoId.isNullOrEmpty()) {
-
             GetFavoriteItem(favoId)
         }
 
@@ -61,13 +60,16 @@ class FavoriteEdit() : AppCompatActivity() {
             .getReference("/favoitems/" + uid);
         val favItemToUpdate : FavoriteItem = FavoriteItem(
             binding.root.findViewById<EditText>(R.id.txtItemNameValue).editableText.toString(),
-            true,
+            binding.switchIsActive.isChecked,
             FirebaseAuth.getInstance().uid,
             binding.root.findViewById<EditText>(R.id.txtLinkValue).editableText.toString(),
             binding.root.findViewById<EditText>(R.id.txtExtraInfoValue).editableText.toString()
         )
         favItemToUpdate.id = uid
         ref.setValue(favItemToUpdate)
+        var int =  Intent(binding.root.context, FavoriteDetail::class.java)
+        int.putExtra(FavoriteFragment.FAVO_ID, uid)
+        startActivity(int)
     }
 
     private fun GetFavoriteItem(uid:String) {
@@ -88,11 +90,7 @@ class FavoriteEdit() : AppCompatActivity() {
                     (binding.txtItemNameValue as TextView).text = favItem.Name
                     (binding.txtExtraInfoValue as TextView).text = favItem.ExtraText
                     (binding.txtLinkValue as TextView).text = favItem.Link
-                    if(favItem.IsActive)
-                        binding.txtActive.setText("ACTIEF")
-                    else
-                        binding.txtActive.setText("NIET ACTIEF")
-
+                    binding.switchIsActive.isChecked = favItem.IsActive
                 }
             }
 

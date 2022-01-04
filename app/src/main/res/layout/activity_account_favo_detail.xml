@@ -167,12 +167,15 @@
                 android:height="50dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:id="@+id/txtIsActiveValue"
+            <Switch
+                android:id="@+id/switchIsActive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:height="50dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:clickable="false"
+                android:gravity="center|right"
+                android:minHeight="48dp"
+                android:scrollbarSize="5dp"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/txtLinkValue"

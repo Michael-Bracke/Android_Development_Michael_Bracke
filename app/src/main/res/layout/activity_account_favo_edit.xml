@@ -160,16 +160,15 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-            <EditText
-                android:id="@+id/txtIsActiveValue"
+            <Switch
+                android:id="@+id/switchIsActive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:height="50dp"
-                android:importantForAutofill="no"
-                android:inputType="text"
+                android:clickable="true"
+                android:gravity="center|right"
                 android:minHeight="48dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:scrollbarSize="5dp"
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/txtLinkValue"
