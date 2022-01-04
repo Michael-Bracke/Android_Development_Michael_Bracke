@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -42,9 +43,31 @@ class FavoriteEdit() : AppCompatActivity() {
 
         // get the req param from request (de meegegeven intent)
         val favoId = intent.getStringExtra(FavoriteFragment.FAVO_ID)
-        if(!favoId.isNullOrEmpty())
-            GetFavoriteItem(favoId)
+        Log.e("FAVOITEMEDIT", ""+favoId)
+        if(!favoId.isNullOrEmpty()) {
 
+            GetFavoriteItem(favoId)
+        }
+
+        binding.btnFavoEdit.setOnClickListener {
+            SaveFavoriteItem(favoId)
+        }
+
+
+    }
+
+    private fun SaveFavoriteItem(uid:String?){
+        val ref = FirebaseDatabase.getInstance(getString(R.string.database_instance))
+            .getReference("/favoitems/" + uid);
+        val favItemToUpdate : FavoriteItem = FavoriteItem(
+            binding.root.findViewById<EditText>(R.id.txtItemNameValue).editableText.toString(),
+            true,
+            FirebaseAuth.getInstance().uid,
+            binding.root.findViewById<EditText>(R.id.txtLinkValue).editableText.toString(),
+            binding.root.findViewById<EditText>(R.id.txtExtraInfoValue).editableText.toString()
+        )
+        favItemToUpdate.id = uid
+        ref.setValue(favItemToUpdate)
     }
 
     private fun GetFavoriteItem(uid:String) {
