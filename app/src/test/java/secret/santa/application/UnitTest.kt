@@ -15,6 +15,7 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import secret.santa.application.validators.EmailValidator
 
 
 /**
@@ -31,10 +32,26 @@ class UnitTest {
     @Mock
     private var resources: Resources? = null
     private var contextMock: Context? = null
+
     @Before
     fun init() {
-        resources = Resources.getSystem()
+        //TODO: Resources kunnen mocken om string resources te kunnen controleren
+        //resources = Resources.getSystem()
     }
+
+    @Test
+    fun CorrectEmailReturnTrue() {
+        assertTrue(EmailValidator.isValidEmail("joske@live.be"));
+    }
+
+    @Test
+    fun BadEmailReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("joskelivebe"));
+    }
+    
+
+    /* Volgende testen zijn nog niet correct geimplementeerd, dienen verder nagekeken te worden.
+    TODO
 
     @Test
     fun test(){
@@ -77,4 +94,7 @@ class UnitTest {
                 returnVal -> assertEquals(returnVal, "Please check your password")
         }
     }
+
+         */
+
 }
