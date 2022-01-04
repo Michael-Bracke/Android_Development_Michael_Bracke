@@ -150,8 +150,5 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.tvFavoItem).text = favoriteItem.Name
-        viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
-            // delete the required items
-        }
     }
 }

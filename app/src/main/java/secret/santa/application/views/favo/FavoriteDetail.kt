@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
 import com.secret.santa.databinding.ActivityAccountFavoDetailBinding
 import com.secret.santa.databinding.ActivityGroupDetailBinding
@@ -36,6 +37,13 @@ class FavoriteDetail() : AppCompatActivity() {
             val intent = Intent(binding.root.context, FavoriteEdit::class.java)
             // send extra paramstest²
             intent.putExtra(FavoriteFragment.FAVO_ID,favoId)
+            startActivity(intent)
+        }
+        binding.ivDeleteItem?.setOnClickListener {
+            val ref = FirebaseDatabase.getInstance(getString(R.string.database_instance))
+                .getReference("/favoitems/" + favoId);
+            ref.removeValue()
+            val intent = Intent(binding.root.context, AccountFavoListSSA::class.java)
             startActivity(intent)
         }
 

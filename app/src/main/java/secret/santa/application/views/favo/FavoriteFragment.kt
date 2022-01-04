@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -18,8 +19,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.secret.santa.R
 import secret.santa.application.models.FavoriteItem
-
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.FragmentManager
 import com.parse.ParseObject
 import com.parse.ParseQuery
@@ -59,14 +62,16 @@ public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     private var param1: String? = null
     private var param2: String? = null
 
-    var accountFavoListSSA : AccountFavoListSSA? = null
+    var accountFavoListSSA: AccountFavoListSSA? = null
 
     val adapter = GroupAdapter<GroupieViewHolder>()
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // indien je zaken hebt in je view
         val recyclerView = view.findViewById<View>(R.id.recyclerView_favoItems) as RecyclerView
+
         recyclerView.adapter = adapter
 
         CheckFavoItemsForUser(view)
@@ -76,9 +81,9 @@ public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        try{
+        try {
             accountFavoListSSA = context as AccountFavoListSSA
-        }catch (e:ClassCastException ){
+        } catch (e: ClassCastException) {
             throw java.lang.ClassCastException(context.toString())
         }
     }
@@ -103,54 +108,57 @@ public class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                         // whenever the item isnt null AND is of the current user, add it to their view
                         // based on the query
                         adapter.add(FavoItem(favoItem))
+
                     }
                 }
 
 
-                adapter.setOnItemClickListener{
-                    // item refereerd naar het item dat effectief gerenderd wordt
-                        item, view->
-                    // cast the item to the item we want to use
-                    val favItem = item as FavoItem
-                    // create the intent to start the next activity
-                    val intent = Intent(view.context, FavoriteDetail::class.java)
-                    // send extra params
-                    intent.putExtra(FAVO_ID, item.favoriteItem.id)
-                    intent.putExtra(FAVO_NAME, item.favoriteItem.Name)
-
-                    startActivity(intent)
-
-                }
-
                 // maak het visueel zichtbaar door deze adapter ook te binden
                 // met de recyclerview
-                val recyclerView = view.findViewById<View>(R.id.recyclerView_favoItems) as RecyclerView
+                val recyclerView =
+                    view.findViewById<View>(R.id.recyclerView_favoItems) as RecyclerView
                 recyclerView.adapter = adapter
             }
 
 
         })
+
+        adapter.setOnItemClickListener {
+            // item refereerd naar het item dat effectief gerenderd wordt
+                item, view ->
+
+            Log.e("FAVITEM", ""+item)
+
+            // cast the item to the item we want to use
+            val favItem = item as FavoItem
+
+            // create the intent to start the next activity
+                val intent = Intent(view.context, FavoriteDetail::class.java)
+                // send extra params
+                intent.putExtra(FAVO_ID, item.favoriteItem.id)
+                intent.putExtra(FAVO_NAME, item.favoriteItem.Name)
+                startActivity(intent)
+
+
+        }
     }
 
-
-
-}
-
-public fun DeleteFavoItem(id: String) {
-    val query = ParseQuery.getQuery<ParseObject>("FavoriteItems")
-
-    // Retrieve the object by id
-    query.whereEqualTo("objectId", id)
-    var results = query.find();
-    results.forEach() {
-        it.deleteInBackground()
-        // reload function to check update
-
+    fun DeleteFavoItem(id:String?) {
+        val ref = FirebaseDatabase.getInstance(getString(R.string.database_instance))
+            .getReference("/favoitems/" + id);
+        ref.removeValue()
     }
 }
 
 
-class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
+
+
+class FavoItem(val favoriteItem: FavoriteItem, val deleteListener: OnDeleteClicked) : Item<GroupieViewHolder>() {
+
+    interface OnDeleteClicked {
+        fun delete(item: FavoriteItem)
+    }
+
     // get the layout you want to have each item to be filled in
     // the 'temp' file
     override fun getLayout(): Int {
@@ -162,11 +170,5 @@ class FavoItem(val favoriteItem: FavoriteItem) : Item<GroupieViewHolder>() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.tvFavoItem).text = favoriteItem.Name
-        viewHolder.itemView.findViewById<ImageView>(R.id.imgCross).setOnClickListener {
-            // set on click listener for deleting an item
-            DeleteFavoItem(viewHolder.item.id.toString())
-            val x = viewHolder.itemView.context as FavoriteFragment
-            x.adapter.notifyDataSetChanged()
-        }
     }
 }

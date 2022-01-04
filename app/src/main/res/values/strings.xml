@@ -40,5 +40,6 @@
     <string name="Favo_Extra_Text">Extra info</string>
     <string name="Favo_Save">Save</string>
     <string name="Favo_Single_item_title">Favorite item</string>
+    <string name="Remove">Remove</string>
 
 </resources>
