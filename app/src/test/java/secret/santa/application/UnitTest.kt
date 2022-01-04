@@ -48,7 +48,16 @@ class UnitTest {
     fun BadEmailReturnsFalse() {
         assertFalse(EmailValidator.isValidEmail("joskelivebe"));
     }
-    
+
+    @Test
+    fun EmailWithWrongDomainReturnsFalse(){
+        assertFalse(EmailValidator.isValidEmail("joske@live"))
+    }
+
+    @Test
+    fun NoValueReturnFalse(){
+        assertFalse(EmailValidator.isValidEmail(null))
+    }
 
     /* Volgende testen zijn nog niet correct geimplementeerd, dienen verder nagekeken te worden.
     TODO
