@@ -91,9 +91,9 @@ class GroupOverviewSSA() : AppCompatActivity() {
                                TODO("Not yet implemented")
                            }
                            override fun onDataChange(snapshot: DataSnapshot) {
-                               if(snapshot.children.count() == 0){
+                               /*if(snapshot.children.count() == 0){
                                    binding.tvGroupCount.text = "Je bent nog niet aangesloten bij een groep. Maak zelf een groep of wacht tot je wordt uitgenodigd!"
-                               }
+                               }*/
                               snapshot.children.forEach{
                                  adapter.add(Groupitem(group))
                                   binding.tvGroupCount.text = ""

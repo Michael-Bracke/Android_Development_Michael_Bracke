@@ -24,6 +24,7 @@ import secret.santa.application.services.MusicServiceSSA
 import java.util.*
 import android.widget.CompoundButton
 import com.google.firebase.FirebaseApp
+import com.google.firebase.database.FirebaseDatabase
 import secret.santa.application.SQLite.DbAdapter
 import secret.santa.application.services.AuthService
 
@@ -154,13 +155,20 @@ class RegisterSSA() : AppCompatActivity() {
                 .setPhotoUri(Uri.parse(profileImageUrl))
                 .build()
         if(user != null) {
+            Log.e("USERCREATION" , "OPSLAGEN IN REALTIME DATABASE")
 
             // wanneer registratie succesvol, slaag de user ook op in eigen database
              helper!!.insertData(regName,profileImageUrl,user.uid)
+            // én in de FB database
+            val userFb = User(user.uid,regName, profileImageUrl)
+            val ref = FirebaseDatabase.getInstance(getString(R.string.database_instance))
+                .getReference("/users/")
+                .push() // zorgt ervoor dat er een nieuwe lijn wordt toegevoegd
+            ref.setValue(userFb)
 
             user.updateProfile(profileUpdates)
                 .addOnSuccessListener {
-                    Log.d("USERCREATION" , "SUCCESVOL OPGESLAGEN")
+                    Log.e("USERCREATION" , "SUCCESVOL OPGESLAGEN")
                     val intent = Intent(this, MainSSA::class.java)
                     // deze stap is belangerijk mits dit er voor gaat zorgen dat de user eens hij is ingelogd
                     // NIET weer terug gaat naar het regisratieformulier met de 'terug' toets

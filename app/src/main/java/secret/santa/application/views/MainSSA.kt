@@ -1,8 +1,13 @@
 package com.secret.santa.views
 
 
+import DownloadWorker
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.StrictMode
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +15,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.secret.santa.R
 import com.secret.santa.databinding.ActivityMainOverviewBinding
+import secret.santa.application.interfaces.Listener
 import secret.santa.application.services.MusicServiceSSA
+import android.widget.Toast
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import secret.santa.application.models.Group
+import java.io.InputStream
+import java.lang.Exception
+import java.net.URL
 
 
 class MainSSA() : AppCompatActivity() {
@@ -21,6 +35,10 @@ class MainSSA() : AppCompatActivity() {
     @Override
     // Algemene Oncreate Functie om layout aan te roepen
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        val policy: StrictMode.ThreadPolicy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
         // overerven van param
         super.onCreate(savedInstanceState)
         binding = ActivityMainOverviewBinding.inflate(layoutInflater)
@@ -34,10 +52,62 @@ class MainSSA() : AppCompatActivity() {
         binding.welcomeText.text = "Welkom, " + FirebaseAuth.getInstance().currentUser?.displayName + "!"
         binding.btnAccount.setOnClickListener{ GoToAccountDetail();}
         binding.btnGroupOverview.setOnClickListener{ GoToGroupDetail();}
+
+        // Haal afbeelding op, aangezien er async methods worden aangeroepen
+        // gebruik je hier callbacks om de profImageUrl mee te geven aan de
+        // Downloadworker, deze downloadworker voorziet via threading de correcte bitmap
+
+        fetchProfImageUrl { result ->
+            DownloadWorker(binding.root.context)
+                .downloadImage(result!!, object: Listener<Bitmap?> {
+                    override fun DownloadComplete(arg: Bitmap?) {
+                        Log.e("RUNNABLE", "" + arg)
+                        binding.imgAvatar.setImageBitmap(arg)
+                    }
+                })
+         }
+
+
     }
 
+    private fun fetchProfImageUrl(callback : (String?) -> Unit) : String? {
+        var imgUrl : String? = ""
+        val ref =  FirebaseDatabase.getInstance(getString(R.string.database_instance)).getReference("/users")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    // itereer over elke user dat gevonden is
+                    var user = it.getValue(secret.santa.application.models.User::class.java)
+                    if(user != null){
+                        Log.e("User", ""+ user!!.ProfileImageUrl)
+                        val userRef = FirebaseDatabase.getInstance(getString(R.string.database_instance)).getReference("/users/"+it.key)
+                        val query = userRef.orderByChild("uid").equalTo(FirebaseAuth.getInstance().uid)
+                        query.addListenerForSingleValueEvent(object: ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                // hier weten we dat ALS we hier in komen, we de correcte gefilterde user hebben
+                                imgUrl = user?.ProfileImageUrl
 
 
+
+
+                                if(imgUrl != null)
+                                    callback(imgUrl)
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                TODO("Not yet implemented")
+                            }
+                        })
+                }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        });
+        return imgUrl;
+    }
 
     // veranderen van actieve layout view
     private fun GoToGroupDetail() {
