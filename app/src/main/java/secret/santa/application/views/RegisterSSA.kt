@@ -67,11 +67,7 @@ class RegisterSSA() : AppCompatActivity() {
             startActivityForResult(intent, 0);
         }
 
-        // MUSICA MAESTROOOO
-        Log.e("Service", "Musicservice wordt gestart...")
         // hier maken we service effectief aan (onCreate method)
-        serviceItent = Intent(binding.root.context, MusicServiceSSA::class.java);
-        startService(serviceItent);
 
 
     }
