@@ -78,17 +78,15 @@ class MainSSA() : AppCompatActivity() {
                 snapshot.children.forEach {
                     // itereer over elke user dat gevonden is
                     var user = it.getValue(secret.santa.application.models.User::class.java)
+                    Log.e("User", ""+ user?.profileImageUrl)
                     if(user != null){
-                        Log.e("User", ""+ user!!.ProfileImageUrl)
+                        Log.e("User", ""+ user.profileImageUrl)
                         val userRef = FirebaseDatabase.getInstance(getString(R.string.database_instance)).getReference("/users/"+it.key)
                         val query = userRef.orderByChild("uid").equalTo(FirebaseAuth.getInstance().uid)
                         query.addListenerForSingleValueEvent(object: ValueEventListener{
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 // hier weten we dat ALS we hier in komen, we de correcte gefilterde user hebben
-                                imgUrl = user?.ProfileImageUrl
-
-
-
+                                imgUrl = user.profileImageUrl
 
                                 if(imgUrl != null)
                                     callback(imgUrl)

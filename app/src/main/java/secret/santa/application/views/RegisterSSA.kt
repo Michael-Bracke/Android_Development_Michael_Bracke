@@ -26,6 +26,7 @@ import android.widget.CompoundButton
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
 import secret.santa.application.SQLite.DbAdapter
+import secret.santa.application.models.User
 import secret.santa.application.services.AuthService
 
 
@@ -160,7 +161,7 @@ class RegisterSSA() : AppCompatActivity() {
             // wanneer registratie succesvol, slaag de user ook op in eigen database
              helper!!.insertData(regName,profileImageUrl,user.uid)
             // én in de FB database
-            val userFb = User(user.uid,regName, profileImageUrl)
+            val userFb = User(regName, profileImageUrl, user.uid)
             val ref = FirebaseDatabase.getInstance(getString(R.string.database_instance))
                 .getReference("/users/")
                 .push() // zorgt ervoor dat er een nieuwe lijn wordt toegevoegd
@@ -224,4 +225,3 @@ class RegisterSSA() : AppCompatActivity() {
 
 
 
-class User(val uid:String, val name:String, val profileImageUrl: String)
